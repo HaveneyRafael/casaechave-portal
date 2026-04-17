@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | Imóveis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = { theme: { extend: { colors: { "primary": "#000000", "surface": "#f9f9f9", "surface-container-lowest": "#ffffff" }, fontFamily: { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }}}}
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    body { font-family: 'Manrope', sans-serif; background-color: #f9f9f9; color: #1a1c1c; }
+    h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+</style>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-surface">
+
+<nav class="fixed top-12 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+    <div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+        <a href="index.html" class="text-2xl font-bold tracking-tighter uppercase font-headline">CasaeChave</a>
+        <div class="hidden md:flex items-center gap-10 font-headline uppercase text-sm font-semibold">
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="index.html">Início</a>
+            <a class="text-red-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-1 after:h-1 after:bg-red-600 after:rounded-full" href="imoveis.html">Imóveis</a>
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="projetos.html">Nossos Projetos</a>
+        </div>
+        <div class="flex items-center gap-6"><a href="agendar-visita.html"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider">Agendar Visita</button></a></div>
+    </div>
+</nav>
+
+<main class="pt-32 min-h-screen max-w-[1440px] mx-auto px-12 pb-32">
+    
+    <div class="pt-16 mb-16 flex justify-between items-end">
+        <div>
+            <h1 class="text-6xl font-headline font-bold tracking-tight mb-4">Catálogo<br>Exclusivo.</h1>
+            <p class="text-zinc-500 font-light max-w-sm">34 propriedades filtradas de acordo com as exigências do nosso padrão arquitetônico em Aracaju.</p>
+        </div>
+    </div>
+
+    <!-- Advanced Filter Bar -->
+    <div class="bg-surface-container-lowest p-6 rounded-[12px] shadow-[0px_10px_30px_rgba(0,0,0,0.03)] border border-zinc-100 flex gap-6 items-end mb-16 relative z-10 sticky top-40">
+        <div class="flex-1">
+            <label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-2">Bairro</label>
+            <select id="filtro-bairro-page" class="w-full bg-zinc-50 border-none rounded-lg focus:ring-0 text-sm py-3 px-4">
+                <option value="">Todos os bairros</option><option value="Atalaia">Atalaia</option><option value="Jardins">Jardins</option><option value="Aruana">Aruana</option><option value="13 de Julho">13 de Julho</option>
+            </select>
+        </div>
+        <div class="flex-1">
+            <label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-2">Tipologia</label>
+            <select id="filtro-tipo-page" class="w-full bg-zinc-50 border-none rounded-lg focus:ring-0 text-sm py-3 px-4">
+                <option value="">Todos os tipos</option><option value="Casa">Casa</option><option value="Apartamento">Apartamento</option><option value="Casa em Condomínio">Casa em Condomínio</option><option value="Lote">Lote</option><option value="Comercial">Comercial</option><option value="Cobertura">Cobertura</option>
+            </select>
+        </div>
+        <div class="flex-1">
+            <label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-2">Suítes</label>
+            <div class="flex gap-2" id="filtro-quartos-container">
+                <button type="button" data-val="1" class="btn-quarto bg-zinc-100 px-4 py-2 rounded-lg text-sm hover:bg-zinc-200 transition-colors">1</button>
+                <button type="button" data-val="2" class="btn-quarto bg-zinc-100 px-4 py-2 rounded-lg text-sm hover:bg-zinc-200 transition-colors">2</button>
+                <button type="button" data-val="3" class="btn-quarto bg-zinc-100 px-4 py-2 rounded-lg text-sm hover:bg-zinc-200 transition-colors">3+</button>
+                <button type="button" data-val="4" class="btn-quarto bg-zinc-100 px-4 py-2 rounded-lg text-sm hover:bg-zinc-200 transition-colors">4+</button>
+            </div>
+        </div>
+        <div class="flex-1">
+            <label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-2">Preço Máximo (R$)</label>
+            <input type="number" id="filtro-preco-page" class="w-full bg-zinc-50 border-none rounded-lg focus:ring-0 text-sm py-3 px-4" placeholder="Ilimitado">
+        </div>
+    </div>
+
+    <!-- Properties Grid -->
+    <div id="imoveis-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <!-- Renderizado via Javascript -->
+        <p class="text-zinc-400 font-light col-span-3">Carregando catálogo de imóveis...</p>
+    </div>
+
+</main>
+
+<script src="supabase-config.js"></script>
+<script src="imoveis-script.js"></script>
+</body>
+</html>

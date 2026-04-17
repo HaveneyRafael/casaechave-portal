@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | Portal do Corretor</title>
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { "primary": "#000000", "surface": "#f9f9f9", "surface-container-lowest": "#ffffff" }, fontFamily: { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }}}}</script>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; } body { font-family: 'Manrope', sans-serif; background-color: #f9f9f9; color: #1a1c1c; } h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }</style>
+</head>
+<body class="flex min-h-screen bg-surface-container-lowest selection:bg-red-600/20">
+
+    <!-- Left Side: Conceptual Image (Hidden on very small screens) -->
+    <div class="hidden lg:flex w-1/2 relative overflow-hidden bg-black flex-col justify-between p-16">
+        <img src="https://images.unsplash.com/photo-1600607687931-ce8a6c25118c?auto=format&fit=crop&q=80&w=1500" class="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-luminosity hover:scale-105 transition-transform duration-[10s]">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/40"></div>
+        
+        <div class="relative z-10">
+            <a href="index.html" class="text-3xl font-bold font-headline uppercase tracking-widest text-white hover:text-red-500 transition-colors">CasaeChave</a>
+        </div>
+        
+        <div class="relative z-10 mb-8">
+            <h2 class="text-[3.5rem] font-headline font-bold text-white leading-[1.1] mb-6 tracking-tight">O motor do<br>nosso legado.</h2>
+            <p class="text-white/70 font-light text-lg max-w-md mb-8">Acesso restrito para corretores associados, diretoria e time de arquitetura. Gerencie o inventário mais desejado de Aracaju.</p>
+            <div class="flex gap-2">
+                <span class="w-12 h-1 bg-white rounded-full"></span>
+                <span class="w-2 h-1 bg-white/30 rounded-full"></span>
+                <span class="w-2 h-1 bg-white/30 rounded-full"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side: Login Form -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 md:p-24 bg-white relative">
+        <div class="max-w-md w-full">
+            
+            <a href="index.html" class="lg:hidden block text-2xl font-bold font-headline uppercase tracking-widest text-primary mb-16">CasaeChave</a>
+
+            <div class="mb-12">
+                <span class="inline-block bg-zinc-100 text-zinc-600 px-3 py-1 text-[10px] uppercase font-bold tracking-widest rounded-sm mb-6">Área Restrita</span>
+                <h1 class="text-4xl font-headline font-bold mb-3 tracking-tight">Bem-vindo de volta</h1>
+                <p class="text-zinc-500 font-light">Insira suas credenciais corporativas operacionais.</p>
+            </div>
+
+            <form id="form-login" class="space-y-6" autocomplete="off">
+                
+                <div>
+                    <label class="block text-xs uppercase font-label text-zinc-400 font-bold tracking-wide mb-2">E-mail Profissional</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">mail</span>
+                        <input type="email" id="email" class="w-full bg-zinc-50 border border-zinc-200 px-12 py-4 rounded-[12px] text-sm focus:border-black focus:ring-1 focus:ring-black placeholder-zinc-400 transition-all outline-none" placeholder="nome@casaechave.com.br" required>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-xs uppercase font-label text-zinc-400 font-bold tracking-wide">Senha de Acesso</label>
+                        <a href="#" class="text-xs text-[#ff291b] hover:text-black font-label font-bold transition-colors">Esqueceu?</a>
+                    </div>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">lock</span>
+                        <input type="password" id="senha" class="w-full bg-zinc-50 border border-zinc-200 px-12 py-4 rounded-[12px] text-sm focus:border-black focus:ring-1 focus:ring-black placeholder-zinc-400 transition-all outline-none" placeholder="••••••••" required>
+                        <button type="button" id="btn-toggle-senha" class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-black transition-colors">visibility</button>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <input type="checkbox" id="remember" class="w-4 h-4 rounded border-zinc-300 text-black focus:ring-black accent-black">
+                    <label for="remember" class="text-sm font-light text-zinc-500">Manter conectado por 30 dias</label>
+                </div>
+
+                <p id="msg-erro" class="text-[#ff291b] text-sm text-center hidden font-bold">Credenciais inválidas.</p>
+                <div id="msg-block" class="hidden bg-red-50 text-[#ff291b] p-4 rounded-lg border border-red-200 text-center text-sm font-bold flex-col items-center justify-center space-y-2">
+                    <div class="flex justify-center items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">lock</span>
+                        <span>Medida de Segurança Ativada</span>
+                    </div>
+                    <span class="text-xs font-medium text-black">Múltiplas tentativas sem sucesso. Aguarde <span id="tempo-restante" class="font-bold underline text-red-600">15:00</span> para tentar novamente.</span>
+                </div>
+
+                <button id="btn-entrar" type="submit" class="w-full bg-primary disabled:bg-zinc-300 disabled:cursor-not-allowed disabled:shadow-none hover:bg-[#ff291b] hover:shadow-xl text-white py-4 rounded-[12px] font-label text-xs uppercase font-bold tracking-widest transition-all duration-300 mt-8 group flex items-center justify-center gap-3 relative overflow-hidden">
+                    <span id="btn-texto" class="relative z-10">Autenticar Sessão</span>
+                    <span class="material-symbols-outlined relative z-10 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+
+            </form>
+            
+            <div class="mt-16 text-center">
+                <p class="text-xs font-light text-zinc-400">Acesso exclusivo e monitorado por IP.<br>O uso indevido está sujeito às normas da diretoria comercial.</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- SDK e Script customizado -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="login-script.js"></script>
+
+</body>
+</html>

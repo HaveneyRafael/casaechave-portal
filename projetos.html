@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | Nossos Projetos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = { theme: { extend: { colors: { "primary": "#000000", "surface": "#f9f9f9", "surface-container-lowest": "#ffffff" }, fontFamily: { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }}}}
+</script>
+<style>body { font-family: 'Manrope', sans-serif; background-color: #f9f9f9; color: #1a1c1c; } h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }</style>
+</head>
+<body class="bg-surface">
+
+<nav class="fixed top-12 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+    <div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+        <a href="index.html" class="text-2xl font-bold tracking-tighter uppercase font-headline">CasaeChave</a>
+        <div class="hidden md:flex items-center gap-10 font-headline uppercase text-sm font-semibold">
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="index.html">Início</a>
+            <a class="text-red-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-1 after:h-1 after:bg-red-600 after:rounded-full" href="projetos.html">Nossos Projetos</a>
+        </div>
+        <div class="flex items-center gap-6"><a href="agendar-visita.html"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider">Agendar Visita</button></a></div>
+    </div>
+</nav>
+
+<main class="pt-32 min-h-screen">
+    
+    <div class="max-w-[1440px] mx-auto px-12 mb-16 pt-16">
+        <h1 class="text-6xl font-headline font-bold tracking-tight mb-8">Padrão CasaeChave.</h1>
+        <div class="flex gap-4">
+            <button class="bg-primary border border-primary text-white px-6 py-2 rounded-full font-label text-[10px] uppercase tracking-widest">Todos</button>
+            <button class="border border-zinc-300 text-zinc-600 px-6 py-2 rounded-full font-label text-[10px] uppercase tracking-widest hover:bg-zinc-100 transition-colors">Prontos</button>
+            <button class="border border-zinc-300 text-zinc-600 px-6 py-2 rounded-full font-label text-[10px] uppercase tracking-widest hover:bg-zinc-100 transition-colors">Em Construção</button>
+        </div>
+    </div>
+
+    <!-- Asymmetric Grid for Projects -->
+    <div class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 md:grid-cols-12 gap-10 pb-32">
+        
+        <!-- Large Card -->
+        <article class="bg-surface-container-lowest rounded-[12px] p-6 col-span-12 md:col-span-8 shadow-[0px_10px_30px_rgba(0,0,0,0.03)] border border-zinc-100 group cursor-pointer">
+            <div class="aspect-[16/9] w-full overflow-hidden rounded-lg mb-6">
+                <img src="https://images.unsplash.com/photo-1628102491629-77858ab572cf?auto=format&fit=crop&q=80&w=1600" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            </div>
+            <div class="flex justify-between items-end">
+                <div>
+                    <span class="text-[10px] uppercase tracking-widest font-bold text-red-600">Pronto para morar</span>
+                    <h2 class="text-3xl font-headline font-bold mt-2">Mansão Suspensão 01</h2>
+                    <p class="text-zinc-500 mt-2 font-light">1 apartamento por andar, 320m², vista panorâmica 360 do rio.</p>
+                </div>
+                <button class="bg-[#ff291b] text-white px-8 py-3 rounded-xl font-label text-xs uppercase tracking-widest hover:bg-red-700 transition">Saber Mais</button>
+            </div>
+        </article>
+
+        <!-- Medium Card Vertical -->
+        <article class="bg-surface-container-lowest rounded-[12px] p-6 col-span-12 md:col-span-4 shadow-[0px_10px_30px_rgba(0,0,0,0.03)] border border-zinc-100 group cursor-pointer flex flex-col justify-between">
+            <div class="aspect-[3/4] w-full overflow-hidden rounded-lg mb-6">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            </div>
+            <div>
+                <span class="text-[10px] uppercase tracking-widest font-bold text-zinc-400">Entrega 2026</span>
+                <h2 class="text-2xl font-headline font-bold mt-2">Villas do Mar</h2>
+                <div class="mt-6 flex justify-between items-center w-full">
+                    <span class="font-headline font-bold text-lg">Investimento Premium</span>
+                    <span class="material-symbols-outlined text-primary">arrow_forward</span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Medium Card Horizontal -->
+        <article class="bg-surface-container-lowest rounded-[12px] p-6 col-span-12 shadow-[0px_10px_30px_rgba(0,0,0,0.03)] border border-zinc-100 group cursor-pointer flex gap-10 items-center">
+            <div class="aspect-[16/6] w-2/3 overflow-hidden rounded-lg hidden md:block">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            </div>
+            <div class="w-full md:w-1/3 p-4">
+                <span class="text-[10px] uppercase tracking-widest font-bold text-red-600">Lançamento</span>
+                <h2 class="text-3xl font-headline font-bold mt-2 mb-4">Condomínio Reserva</h2>
+                <p class="text-zinc-500 font-light mb-8">Terrenos em loteamento fechado na região dos lagos com clube imersivo projetado por nossos arquitetos.</p>
+                <button class="bg-[#ff291b] text-white px-8 py-3 rounded-xl font-label text-xs uppercase w-full tracking-widest hover:bg-red-700 transition">Saber Mais</button>
+            </div>
+        </article>
+    </div>
+
+</main>
+</body>
+</html>

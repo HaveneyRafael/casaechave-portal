@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | Sobre Nós</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = { theme: { extend: { colors: { "primary": "#000000", "surface": "#f9f9f9", "surface-container-lowest": "#ffffff" }, fontFamily: { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }}}}
+</script>
+<style>body { font-family: 'Manrope', sans-serif; background-color: #f9f9f9; color: #1a1c1c; } h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }</style>
+</head>
+<body class="bg-surface">
+
+<nav class="fixed top-12 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+    <div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+        <a href="index.html" class="text-2xl font-bold tracking-tighter uppercase font-headline">CasaeChave</a>
+        <div class="hidden md:flex items-center gap-10 font-headline uppercase text-sm font-semibold">
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="index.html">Início</a>
+            <a class="text-red-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-1 after:h-1 after:bg-red-600 after:rounded-full" href="sobre.html">Sobre Nós</a>
+        </div>
+        <div class="flex items-center gap-6"><a href="agendar-visita.html"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider">Agendar Visita</button></a></div>
+    </div>
+</nav>
+
+<main class="pt-24 min-h-screen">
+    <!-- Editorial Hero -->
+    <section class="h-[70vh] flex items-center bg-zinc-100 relative overflow-hidden">
+        <div class="absolute inset-0 right-1/4">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover opacity-90 mix-blend-multiply" alt="Architecture Office">
+        </div>
+        <div class="relative z-10 px-12 max-w-[1440px] w-full mx-auto flex justify-end">
+            <div class="bg-white p-16 shadow-2xl max-w-xl right-0 mr-12 rounded-[12px] border border-zinc-100">
+                <span class="text-[10px] uppercase font-bold text-red-600 tracking-widest mb-6 block">Nossa Origem</span>
+                <h1 class="text-5xl font-headline font-bold leading-[1.1] mb-6 tracking-tight">Construindo<br>Legados em<br>Sergipe.</h1>
+                <p class="text-zinc-500 font-light text-lg">A primeira assessoria de corretores autônomos liderada por arquitetos em Aracaju, que não vende tijolos, vende design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Statement -->
+    <section class="py-40 px-12 max-w-[1000px] mx-auto text-center">
+        <h2 class="text-4xl font-headline font-light leading-snug">"Nós acreditamos que um projeto arquitetônico impecável é o maior asset de valorização que existe. Nós unimos a estética primorosa ao faro comercial aguçado."</h2>
+        <div class="w-12 h-1 bg-red-600 mx-auto mt-12"></div>
+    </section>
+
+    <!-- Team Grid (Grayscale) -->
+    <section class="bg-surface-container-lowest py-32 px-12">
+        <div class="max-w-[1440px] mx-auto">
+            <h3 class="text-3xl font-bold mb-16 text-center">Nossos Sócios Diretores</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <article class="group">
+                    <div class="aspect-[3/4] mb-6 overflow-hidden rounded-[12px]">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    </div>
+                    <h4 class="text-2xl font-bold font-headline">Thiago Alves</h4>
+                    <span class="text-zinc-400 text-sm font-label uppercase tracking-widest">Sócio Fundador & CEO</span>
+                </article>
+                <article class="group">
+                    <div class="aspect-[3/4] mb-6 overflow-hidden rounded-[12px]">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    </div>
+                    <h4 class="text-2xl font-bold font-headline">Mariana Reis</h4>
+                    <span class="text-zinc-400 text-sm font-label uppercase tracking-widest">Head de Arquitetura</span>
+                </article>
+                <article class="group">
+                    <div class="aspect-[3/4] mb-6 overflow-hidden rounded-[12px]">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    </div>
+                    <h4 class="text-2xl font-bold font-headline">Lucas Fernandes</h4>
+                    <span class="text-zinc-400 text-sm font-label uppercase tracking-widest">Head de Novos Negócios</span>
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

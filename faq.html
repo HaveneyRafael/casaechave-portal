@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | FAQ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: { extend: { colors: { "primary": "#000000", "surface": "#f9f9f9", "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3f4", "tertiary": "#7e0000", "on-surface-variant": "#474747", "tertiary-container": "#e8110a" },
+              fontFamily: { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }
+          }}
+        }
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    body { font-family: 'Manrope', sans-serif; background-color: #f9f9f9; color: #1a1c1c; }
+    h1, h2, h3, summary { font-family: 'Space Grotesk', sans-serif; }
+</style>
+</head>
+<body class="bg-surface">
+
+<nav class="fixed top-12 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+    <div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+        <a href="index.html" class="text-2xl font-bold tracking-tighter uppercase font-headline">CasaeChave</a>
+        <div class="hidden md:flex items-center gap-10 font-headline uppercase text-sm font-semibold">
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="index.html">Início</a>
+            <a class="text-red-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-1 after:h-1 after:bg-red-600 after:rounded-full" href="faq.html">FAQ</a>
+        </div>
+        <div class="flex items-center gap-6">
+            <a href="agendar-visita.html"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider">Agendar Visita</button></a>
+        </div>
+    </div>
+</nav>
+
+<main class="pt-48 pb-32 px-12 max-w-[900px] mx-auto min-h-screen">
+    <h1 class="text-5xl font-bold text-center mb-6">Como podemos ajudar?</h1>
+    <p class="text-zinc-500 text-center text-lg mb-20 max-w-2xl mx-auto">Tudo que você precisa saber sobre processos de compra, locação, financiamento e curadoria da CasaeChave.</p>
+    
+    <div class="space-y-6">
+        <!-- Question Blocks: pure tonal layer styling without borders -->
+        <details class="group bg-surface-container-lowest p-8 rounded-[12px] shadow-[0px_4px_24px_rgba(0,0,0,0.02)] list-none open:bg-white transition-all">
+            <summary class="flex justify-between items-center cursor-pointer list-none font-bold text-xl text-zinc-900 outline-none">
+                Como ocorre a aprovação de crédito num lançamento?
+                <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180">expand_more</span>
+            </summary>
+            <p class="mt-6 text-on-surface-variant font-light leading-relaxed">
+                Nos lançamentos trabalhando diretamente com a incorporadora, montamos a sua pasta com documentos básicos (RG, CPF, Comprovante de Residência/Renda) e enviamos para a correspondente bancária parceira visando pré-aproximação ágil. Todo o fluxo é transparente e não custa nenhum valor adicional.
+            </p>
+        </details>
+        
+        <details class="group bg-surface-container-lowest p-8 rounded-[12px] shadow-[0px_4px_24px_rgba(0,0,0,0.02)] list-none open:bg-white transition-all">
+            <summary class="flex justify-between items-center cursor-pointer list-none font-bold text-xl text-zinc-900 outline-none">
+                O que difere a CasaeChave de corretores comuns?
+                <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180">expand_more</span>
+            </summary>
+            <p class="mt-6 text-on-surface-variant font-light leading-relaxed">
+                A CasaeChave é uma assessoria de inteligência fundamentada no design e arquitetura. Só inserimos no nosso catálogo propriedades aprovadas pela nossa curadoria estética documental, com suporte de advogados de plantão e arquitetos que podem fornecer perspectivas de planta e reforma no momento da visita.
+            </p>
+        </details>
+        
+        <details class="group bg-surface-container-lowest p-8 rounded-[12px] shadow-[0px_4px_24px_rgba(0,0,0,0.02)] list-none open:bg-white transition-all">
+            <summary class="flex justify-between items-center cursor-pointer list-none font-bold text-xl text-zinc-900 outline-none">
+                Aceitam permutas para imóveis de luxo?
+                <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180">expand_more</span>
+            </summary>
+            <p class="mt-6 text-on-surface-variant font-light leading-relaxed">
+                A aceitação de permutas depende inteiramente do proprietário do imóvel visado ou da política da construtora. No geral, temos um índice elevado de sucesso envolvendo permuta de lotes em condomínios de alto padrão com margem de até 30% do valor da compra.
+            </p>
+        </details>
+    </div>
+
+    <div class="mt-20 pt-10 border-t border-zinc-200 flex flex-col items-center">
+        <h3 class="text-2xl font-bold mb-4">Ainda tem dúvidas?</h3>
+        <p class="text-zinc-500 mb-8 max-w-sm text-center">Entre em contato via WhatsApp para falar de imediato com um arquiteto ou consultor de vendas.</p>
+        <button class="bg-primary text-white py-4 px-10 rounded-[12px] font-headline uppercase tracking-widest text-xs hover:bg-zinc-800 transition-colors shadow-xl">Falar com Consultor</button>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+
+# Secrets & API keys
+generate_stitch_pages.sh
+.stitch_projects.json
+stitch_projects.json
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Skills (internal tooling)
+skills/

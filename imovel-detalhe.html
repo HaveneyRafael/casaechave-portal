@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title id="page-title">CasaeChave | Carregando...</title>
+<meta name="description" content="Imóvel em Aracaju/SE — CasaeChave">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { "primary": "#000000", "surface": "#f9f9f9", "surface-container-lowest": "#ffffff" }, fontFamily: { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }}}}</script>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: text-bottom; } body { font-family: 'Manrope', sans-serif; background-color: #f9f9f9; color: #1a1c1c; } h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }</style>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-surface">
+
+<nav class="fixed top-12 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+    <div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+        <a href="index.html" class="text-2xl font-bold font-headline uppercase tracking-tighter">CasaeChave</a>
+        <div class="flex items-center gap-6"><a href="agendar-visita.html"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider">Agendar Visita</button></a></div>
+    </div>
+</nav>
+
+<main class="pt-32 pb-32">
+    <!-- Breadcrumbs -->
+    <div class="max-w-[1440px] mx-auto px-12 py-8 text-xs font-label uppercase text-zinc-400 tracking-widest">
+        <a href="index.html" class="hover:text-primary">Home</a> / <a href="imoveis.html" class="hover:text-primary">Imóveis</a> / <span id="bc-titulo" class="text-zinc-800">Carregando...</span>
+    </div>
+
+    <!-- Gallery Hero -->
+    <div class="max-w-[1440px] mx-auto px-12 mb-12">
+        <div id="gallery-container" class="grid grid-cols-4 grid-rows-2 gap-4 h-[600px] rounded-[12px] overflow-hidden bg-zinc-100">
+            <!-- As fotos virão pra cá -->
+        </div>
+    </div>
+
+    <!-- Body Layout -->
+    <div class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-12 gap-20">
+        
+        <!-- Main Content -->
+        <div class="lg:col-span-8">
+            <div class="mb-10 flex justify-between items-start">
+                <div>
+                    <h1 id="detalhe-titulo" class="text-5xl font-headline font-bold mb-4 tracking-tight">Carregando...</h1>
+                    <p class="text-zinc-500 font-light flex items-center gap-2 text-lg"><span class="material-symbols-outlined">location_on</span> <span id="detalhe-bairro">...</span>, Aracaju</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-label uppercase text-zinc-400 tracking-widest mb-1">Preço Venda</p>
+                    <p id="detalhe-preco" class="text-4xl font-headline font-bold">R$ --.--</p>
+                </div>
+            </div>
+
+            <!-- Features Bar -->
+            <div class="flex gap-12 py-8 border-y border-zinc-200 mb-12">
+                <div class="flex flex-col"><span class="text-xs uppercase font-label tracking-widest text-zinc-400 mb-1">Área Útil</span><span id="detalhe-area" class="text-xl font-headline font-bold">-- m²</span></div>
+                <div class="flex flex-col"><span class="text-xs uppercase font-label tracking-widest text-zinc-400 mb-1">Dormitórios</span><span id="detalhe-suites" class="text-xl font-headline font-bold">-- Suítes</span></div>
+                <div class="flex flex-col"><span class="text-xs uppercase font-label tracking-widest text-zinc-400 mb-1">Vagas</span><span id="detalhe-vagas" class="text-xl font-headline font-bold">-- Vagas</span></div>
+                <div class="flex flex-col"><span class="text-xs uppercase font-label tracking-widest text-zinc-400 mb-1">Condomínio</span><span id="detalhe-condominio" class="text-xl font-headline font-bold">R$ ---</span></div>
+            </div>
+
+            <!-- Description -->
+            <h2 class="text-2xl font-headline font-bold mb-6">Descrição da Propriedade</h2>
+            <div id="detalhe-descricao" class="prose prose-zinc prose-lg font-light text-zinc-600 mb-12">
+                <p>Carregando as informações...</p>
+            </div>
+
+            <!-- Infrastructure List -->
+            <div id="infra-secao" class="hidden">
+                <h2 class="text-2xl font-headline font-bold mb-6">Infraestrutura do Empreendimento</h2>
+                <div id="detalhe-infra" class="grid grid-cols-2 gap-y-4 font-light text-zinc-600 mb-12">
+                    <!-- Javascript Vai desenhar as tags com Check aqui -->
+                </div>
+            </div>
+
+            <!-- SEO Description (gerada automaticamente, visível para crawlers) -->
+            <div id="seo-secao" class="hidden">
+                <h2 class="text-2xl font-headline font-bold mb-6">Sobre este imóvel em Aracaju</h2>
+                <div id="seo-descricao-texto" class="prose prose-zinc font-light text-zinc-500 text-sm leading-relaxed mb-12">
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Action Sidebar -->
+        <div class="lg:col-span-4">
+            <div class="bg-surface-container-lowest p-8 rounded-[12px] shadow-[0px_20px_40px_rgba(26,28,28,0.06)] border border-zinc-100 sticky top-40">
+                <div class="flex items-center gap-4 border-b border-zinc-100 pb-6 mb-6">
+                    <img id="corretor-foto" src="https://ui-avatars.com/api/?name=C&background=333&color=fff" class="w-16 h-16 rounded-full object-cover">
+                    <div>
+                        <p id="corretor-nome" class="font-headline font-bold text-lg">Nome Corretor</p>
+                        <p class="text-xs uppercase font-label tracking-widest text-[#ff291b]">Diretor Comercial</p>
+                    </div>
+                </div>
+                
+                <h3 class="font-bold text-xl mb-4">Interessado?</h3>
+                <p class="text-sm font-light text-zinc-500 mb-6">Deixe seus dados e nosso consultor entrará em contato em até 30 minutos.</p>
+                
+                <form id="form-lead" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] uppercase font-label tracking-wide text-zinc-500 mb-1.5">Nome *</label>
+                        <input type="text" id="lead-nome" required class="w-full bg-surface-container-low border-0 px-4 py-3 rounded-md text-sm placeholder-zinc-400" placeholder="Seu nome completo">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase font-label tracking-wide text-zinc-500 mb-1.5">WhatsApp *</label>
+                        <input type="tel" id="lead-wpp" required class="w-full bg-surface-container-low border-0 px-4 py-3 rounded-md text-sm placeholder-zinc-400" placeholder="(79) 99999-9999" maxlength="15">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase font-label tracking-wide text-zinc-500 mb-1.5">Imóvel de Interesse *</label>
+                        <input type="text" id="lead-imovel" required class="w-full bg-surface-container-low border-0 px-4 py-3 rounded-md text-sm placeholder-zinc-400" placeholder="Ex: Residencial Orion">
+                    </div>
+                    <div id="lead-msg-sucesso" class="hidden bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-2 rounded-lg text-xs font-body">
+                        ✓ Registrado com sucesso! Entraremos em contato.
+                    </div>
+                    <div id="lead-msg-erro" class="hidden bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-lg text-xs font-body">
+                        Erro ao enviar. Tente novamente.
+                    </div>
+                    <button type="submit" id="btn-enviar-lead" class="w-full bg-[#ff291b] hover:bg-black text-white p-4 rounded-xl font-label text-xs uppercase tracking-widest transition-colors mt-2">Agendar Visita</button>
+                </form>
+
+                <!-- Share Buttons -->
+                <div class="mt-6 pt-6 border-t border-zinc-100">
+                    <p class="text-[10px] uppercase font-label tracking-widest text-zinc-400 mb-3">Compartilhar este imóvel</p>
+                    <div class="flex gap-3">
+                        <button id="btn-share-whatsapp" class="flex-1 flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white py-3 rounded-xl text-xs font-label uppercase tracking-widest transition-colors">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            WhatsApp
+                        </button>
+                        <button id="btn-copy-link" class="relative flex-1 flex items-center justify-center gap-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 py-3 rounded-xl text-xs font-label uppercase tracking-widest transition-colors">
+                            <span class="material-symbols-outlined text-sm">link</span>
+                            Copiar Link
+                            <span id="tooltip-copiado" class="absolute -top-9 left-1/2 -translate-x-1/2 bg-zinc-900 text-white text-[10px] px-3 py-1.5 rounded-lg opacity-0 pointer-events-none transition-opacity duration-300 whitespace-nowrap font-label">Link copiado! ✓</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script src="supabase-config.js"></script>
+<script src="seo-utils.js"></script>
+<script src="detalhe-script.js"></script>
+</body>
+</html>

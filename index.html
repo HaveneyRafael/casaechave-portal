@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | Architectural Monolith</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&amp;family=Manrope:wght@200;300;400;500&amp;family=Inter:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#e8e8e8",
+                      "primary": "#000000",
+                      "secondary-container": "#ced4e4",
+                      "surface-bright": "#f9f9f9",
+                      "tertiary-fixed": "#c00001",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f3f3f4",
+                      "inverse-primary": "#c8c6c5",
+                      "primary-fixed-dim": "#474746",
+                      "tertiary-container": "#e8110a",
+                      "inverse-surface": "#2f3131",
+                      "surface-container-lowest": "#ffffff",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#eeeeee",
+                      "tertiary-fixed-dim": "#930000",
+                      "on-surface-variant": "#474747",
+                      "secondary-fixed-dim": "#a4abbb",
+                      "on-secondary-fixed-variant": "#353c48",
+                      "on-background": "#1a1c1c",
+                      "background": "#f9f9f9",
+                      "on-tertiary-container": "#ffffff",
+                      "on-secondary-fixed": "#151c27",
+                      "surface-dim": "#dadada",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#f0f1f1",
+                      "secondary-fixed": "#c0c7d6",
+                      "primary-fixed": "#5f5e5e",
+                      "on-error-container": "#410002",
+                      "surface-variant": "#e2e2e2",
+                      "on-tertiary-fixed": "#ffffff",
+                      "on-primary-fixed": "#ffffff",
+                      "on-primary": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#ffdad4",
+                      "on-surface": "#1a1c1c",
+                      "outline-variant": "#c6c6c6",
+                      "surface-tint": "#5f5e5e",
+                      "surface-container-highest": "#e2e2e2",
+                      "primary-container": "#3c3b3b",
+                      "on-primary-fixed-variant": "#e5e2e1",
+                      "secondary": "#585f6c",
+                      "outline": "#777777",
+                      "on-secondary-container": "#151c27",
+                      "tertiary": "#7e0000",
+                      "on-primary-container": "#ffffff",
+                      "surface": "#f9f9f9",
+                      "on-tertiary": "#ffdad4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "12px",
+                      "xl": "16px",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk", "sans-serif"],
+                      "body": ["Manrope", "sans-serif"],
+                      "label": ["Inter", "sans-serif"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        body { font-family: 'Manrope', sans-serif; background-color: #ffffff; color: #1a1c1c; }
+        h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface selection:bg-tertiary/10">
+<!-- Announcement Bar -->
+<div class="bg-primary text-on-primary py-3 px-6 text-center">
+<p class="font-label text-[10px] uppercase tracking-[0.2em] font-semibold">Condições exclusivas para lançamentos em Aracaju • Taxas reduzidas este mês</p>
+</div>
+<!-- Shared Component: TopNavBar -->
+<nav class="fixed top-12 w-full z-50 bg-white/80 dark:bg-black/80 backdrop-blur-xl border-none shadow-[0px_20px_40px_rgba(26,28,28,0.04)]">
+<div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-zinc-950 dark:text-white uppercase font-headline">
+                CasaeChave
+            </div>
+<div class="hidden md:flex items-center gap-10 font-headline tracking-tight uppercase text-sm font-semibold">
+<a class="text-red-600 dark:text-red-500 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-1 after:h-1 after:bg-red-600 after:rounded-full hover:scale-105 transition-transform duration-300" href="index.html">Início</a>
+<a class="text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors hover:scale-105 transition-transform duration-300" href="imoveis.html">Imóveis</a>
+<a class="text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors hover:scale-105 transition-transform duration-300" href="imoveis.html?locacao=true">Aluguéis</a>
+<a class="text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors hover:scale-105 transition-transform duration-300" href="projetos.html">Nossos Projetos</a>
+<a class="text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors hover:scale-105 transition-transform duration-300" href="faq.html">FAQ</a>
+<a class="text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors hover:scale-105 transition-transform duration-300" href="sobre.html">Sobre Nós</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-zinc-950" data-icon="search">search</button>
+<button class="material-symbols-outlined text-zinc-950" data-icon="favorite">favorite</button>
+<a href="agendar-visita.html"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider hover:scale-[1.02] transition-all">
+                    Agendar Visita
+                </button></a>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center px-12 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="Modern geometric luxury home with pool at dusk" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=100&w=2560"/>
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<div class="container mx-auto relative z-10 editorial-grid">
+<div class="col-start-1 col-span-8 lg:col-span-6 pt-20">
+<h1 class="text-[clamp(3rem,8vw,5.5rem)] leading-[0.9] font-bold tracking-tighter text-white drop-shadow-2xl">
+                        A ARTE DE <br/> MORAR BEM.
+                    </h1>
+</div>
+
+</div>
+</section>
+<!-- Search Bar -->
+<section class="max-w-[1440px] mx-auto -mt-16 relative z-30 px-12">
+<div class="bg-white p-8 rounded-xl shadow-[0px_30px_60px_rgba(0,0,0,0.08)] flex flex-wrap lg:flex-nowrap items-end gap-8">
+<div class="flex-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-3">Tipo do Imóvel</label>
+<select id="filtro-tipo" class="w-full border-0 border-b border-zinc-200 focus:ring-0 focus:border-primary py-2 font-body text-zinc-900 bg-transparent">
+<option value="">Todos os tipos</option>
+<option value="Apartamento">Apartamento</option>
+<option value="Casa">Casa</option>
+<option value="Casa em Condomínio">Casa em Condomínio</option>
+<option value="Lote">Lote</option>
+<option value="Comercial">Comercial</option>
+<option value="Cobertura">Cobertura</option>
+<option value="Terreno">Terreno</option>
+</select>
+</div>
+<div class="flex-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-3">Faixa de Preço</label>
+<select id="filtro-preco" class="w-full border-0 border-b border-zinc-200 focus:ring-0 focus:border-primary py-2 font-body text-zinc-900 bg-transparent">
+<option value="">Qualquer faixa</option>
+<option value="0-500000">Até R$ 500.000</option>
+<option value="500000-1500000">R$ 500k – R$ 1.5M</option>
+<option value="1500000-3000000">R$ 1.5M – R$ 3M</option>
+<option value="3000000-">Acima de R$ 3M</option>
+</select>
+</div>
+<div class="flex-1">
+<label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-3">Localização</label>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-zinc-400 mr-2" data-icon="location_on">location_on</span>
+<input id="filtro-localizacao" class="w-full border-0 border-b border-zinc-200 focus:ring-0 focus:border-primary py-2 font-body text-zinc-900 bg-transparent" placeholder="Bairro ou Condomínio" type="text"/>
+</div>
+</div>
+<button id="btn-buscar" class="bg-primary text-white w-full lg:w-48 py-5 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 transition-all font-label text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+                    Buscar
+                </button>
+</div>
+</section>
+<!-- Property Grid -->
+<section class="py-32 px-12 max-w-[1440px] mx-auto">
+<div class="flex justify-between items-end mb-16 w-full gap-8">
+<div>
+<h2 class="text-4xl font-headline font-bold tracking-tight">Imóveis que podem te interessar</h2>
+<p class="text-zinc-500 font-body font-light mt-4 max-w-lg">Curadoria exclusiva dos imóveis mais desejados de Aracaju, selecionados por nossa equipe de arquitetura e design.</p>
+</div>
+<a class="text-xs font-label uppercase tracking-widest border-b border-primary pb-1 hover:text-tertiary hover:border-tertiary transition-all whitespace-nowrap" href="imoveis.html">Ver todos</a>
+</div>
+<div id="imoveis-destaque" class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
+<!-- Skeleton loading -->
+<div class="animate-pulse"><div class="bg-zinc-200 rounded-lg aspect-[4/5] mb-8"></div><div class="h-6 bg-zinc-200 rounded w-3/4 mb-2"></div><div class="h-4 bg-zinc-100 rounded w-1/2"></div></div>
+<div class="animate-pulse"><div class="bg-zinc-200 rounded-lg aspect-[4/5] mb-8"></div><div class="h-6 bg-zinc-200 rounded w-3/4 mb-2"></div><div class="h-4 bg-zinc-100 rounded w-1/2"></div></div>
+<div class="animate-pulse"><div class="bg-zinc-200 rounded-lg aspect-[4/5] mb-8"></div><div class="h-6 bg-zinc-200 rounded w-3/4 mb-2"></div><div class="h-4 bg-zinc-100 rounded w-1/2"></div></div>
+</div>
+</section>
+
+<!-- Imóveis para Locação -->
+<section class="py-32 px-12 max-w-[1440px] mx-auto border-t border-zinc-100">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="text-4xl font-headline font-bold mb-4">Imóveis para Locação</h2>
+<p class="text-zinc-500 font-body font-light text-lg">As melhores opções para alugar com conforto e segurança.</p>
+</div>
+<a class="hidden md:flex items-center gap-2 text-primary font-label uppercase tracking-widest text-xs font-bold hover:gap-4 transition-all" href="imoveis.html?locacao=true">
+            Ver todas as opções <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div id="imoveis-locacao" class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full">
+<!-- Skeleton loading -->
+<div class="animate-pulse"><div class="bg-zinc-200 rounded-lg aspect-[4/5] mb-8"></div><div class="h-6 bg-zinc-200 rounded w-3/4 mb-2"></div><div class="h-4 bg-zinc-100 rounded w-1/2"></div></div>
+<div class="animate-pulse"><div class="bg-zinc-200 rounded-lg aspect-[4/5] mb-8"></div><div class="h-6 bg-zinc-200 rounded w-3/4 mb-2"></div><div class="h-4 bg-zinc-100 rounded w-1/2"></div></div>
+<div class="animate-pulse"><div class="bg-zinc-200 rounded-lg aspect-[4/5] mb-8"></div><div class="h-6 bg-zinc-200 rounded w-3/4 mb-2"></div><div class="h-4 bg-zinc-100 rounded w-1/2"></div></div>
+</div>
+</section>
+<!-- Neighborhoods -->
+<section class="bg-surface-container-low py-32 px-12">
+<div class="max-w-[1440px] mx-auto">
+<h2 class="text-4xl font-headline font-bold mb-16 text-center">Explore os bairros de Aracaju</h2>
+<div id="bairros-grid" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Skeleton loading -->
+<div class="animate-pulse aspect-square bg-zinc-200 rounded-lg"></div>
+<div class="animate-pulse aspect-square bg-zinc-200 rounded-lg"></div>
+<div class="animate-pulse aspect-square bg-zinc-200 rounded-lg"></div>
+<div class="animate-pulse aspect-square bg-zinc-200 rounded-lg"></div>
+</div>
+</div>
+</section>
+<!-- Agents Section -->
+<section class="py-32 px-12 max-w-[1440px] mx-auto text-center">
+<h2 class="text-4xl font-headline font-bold mb-4">Venda com os melhores corretores</h2>
+<p class="text-zinc-500 font-body font-light mb-16 max-w-xl mx-auto">Nossos especialistas estão prontos para oferecer um atendimento personalizado e estratégico para a venda do seu imóvel.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+<div class="flex flex-col items-center">
+<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" data-alt="Corretor parceiro CasaeChave" src="assets/corretor.jpg"/>
+<p class="font-headline font-bold text-xl">Diretor de Vendas</p>
+<p class="text-sm font-label uppercase tracking-widest text-zinc-400 mt-1">Especialista em Alto Padrão</p>
+</div>
+<div class="flex flex-col items-center">
+<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" data-alt="Corretora parceira CasaeChave" src="assets/corretora.jpg"/>
+<p class="font-headline font-bold text-xl">Diretora Comercial</p>
+<p class="text-sm font-label uppercase tracking-widest text-zinc-400 mt-1">Lançamentos Exclusivos</p>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-32 px-12 bg-surface-container-lowest">
+<div class="max-w-[800px] mx-auto">
+<h2 class="text-4xl font-headline font-bold mb-16 text-center">FAQ</h2>
+<div class="space-y-4">
+<details class="group border-b border-zinc-100 pb-6">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="text-lg font-headline font-semibold">Como funciona o processo de agendamento de visita?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<p class="mt-4 text-zinc-500 font-body font-light leading-relaxed">Você pode agendar diretamente pelo site clicando no botão "Agendar Visita" em qualquer imóvel ou entrar em contato com um de nossos corretores especialistas via WhatsApp.</p>
+</details>
+<details class="group border-b border-zinc-100 pb-6">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="text-lg font-headline font-semibold">Quais documentos são necessários para locação?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<p class="mt-4 text-zinc-500 font-body font-light leading-relaxed">Para locação física, solicitamos RG, CPF, Comprovante de Residência e Comprovante de Renda (3x o valor do aluguel). Oferecemos também modalidades de Seguro Fiança e Título de Capitalização.</p>
+</details>
+<details class="group border-b border-zinc-100 pb-6">
+<summary class="flex justify-between items-center cursor-pointer list-none">
+<span class="text-lg font-headline font-semibold">A CasaeChave atua com imóveis comerciais?</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180" data-icon="expand_more">expand_more</span>
+</summary>
+<p class="mt-4 text-zinc-500 font-body font-light leading-relaxed">Sim, possuímos um setor dedicado exclusivamente a imóveis comerciais, galpões e terrenos para incorporação em áreas estratégicas de Aracaju.</p>
+</details>
+</div>
+</div>
+</section>
+<!-- Blog Section -->
+<section class="py-32 px-12 max-w-[1440px] mx-auto">
+<h2 class="text-4xl font-headline font-bold mb-16">Blog Imobiliário</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<a href="blog-investir-aracaju.html" class="block">
+<article class="group">
+<div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vista aérea de Aracaju com prédios modernos e o rio Sergipe ao fundo" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"/>
+</div>
+<span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Investimento</span>
+<h3 class="text-xl font-headline font-bold mt-2 mb-4">Por que investir em imóveis em Aracaju?</h3>
+<p class="text-zinc-500 font-body font-light text-sm mb-6">Valorização de 13,79% em 2024, m² mais acessível do Nordeste e perspectivas de crescimento acelerado. Entenda os números...</p>
+<span class="text-xs font-bold font-label uppercase tracking-widest group-hover:text-tertiary transition-colors">Leia mais →</span>
+</article>
+</a>
+<a href="blog-qualidade-vida.html" class="block">
+<article class="group">
+<div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Orla de Aracaju ao pôr do sol com coqueiros e ciclovia" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"/>
+</div>
+<span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Lifestyle</span>
+<h3 class="text-xl font-headline font-bold mt-2 mb-4">Qualidade de vida em Aracaju</h3>
+<p class="text-zinc-500 font-body font-light text-sm mb-6">Clima tropical, orla premiada, custo de vida acessível e infraestrutura em expansão. Descubra por que Aracaju é a capital ideal para morar...</p>
+<span class="text-xs font-bold font-label uppercase tracking-widest group-hover:text-tertiary transition-colors">Leia mais →</span>
+</article>
+</a>
+<a href="blog-barra-dos-coqueiros.html" class="block">
+<article class="group">
+<div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Ponte Construtor João Alves ligando Aracaju à Barra dos Coqueiros ao entardecer" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"/>
+</div>
+<span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Expansão</span>
+<h3 class="text-xl font-headline font-bold mt-2 mb-4">O crescimento da Barra dos Coqueiros/SE</h3>
+<p class="text-zinc-500 font-body font-light text-sm mb-6">Novos empreendimentos, nova ponte estaiada em construção e valorização exponencial. Conheça o destino mais promissor de Sergipe...</p>
+<span class="text-xs font-bold font-label uppercase tracking-widest group-hover:text-tertiary transition-colors">Leia mais →</span>
+</article>
+</a>
+</div>
+</section>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="bg-zinc-50 dark:bg-zinc-950 w-full py-24 px-12">
+<div class="grid grid-cols-4 gap-20 max-w-[1440px] mx-auto">
+<div class="col-span-1">
+<div class="font-space-grotesk font-bold text-xl uppercase tracking-widest text-zinc-950 dark:text-white mb-8">
+                    CasaeChave
+                </div>
+<p class="text-zinc-400 font-manrope font-light text-sm leading-relaxed">
+                    A curadoria definitiva para o mercado imobiliário premium em Sergipe. Transformando espaços em legados arquitetônicos.
+                </p>
+</div>
+<div>
+<h4 class="text-zinc-900 dark:text-zinc-100 font-space-grotesk font-bold text-sm uppercase tracking-widest mb-8">Menu</h4>
+<ul class="space-y-4 font-manrope font-light text-base">
+<li><a class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-x-1 transition-transform inline-block" href="index.html">Início</a></li>
+<li><a class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-x-1 transition-transform inline-block" href="imoveis.html">Imóveis</a></li>
+<li><a class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-x-1 transition-transform inline-block" href="projetos.html">Nossos Projetos</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-zinc-900 dark:text-zinc-100 font-space-grotesk font-bold text-sm uppercase tracking-widest mb-8">Informações</h4>
+<ul class="space-y-4 font-manrope font-light text-base">
+<li><a class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-x-1 transition-transform inline-block" href="faq.html">FAQ</a></li>
+<li><a class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-x-1 transition-transform inline-block" href="sobre.html">Sobre Nós</a></li>
+<li><a class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:translate-x-1 transition-transform inline-block" href="#">Privacidade</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-zinc-900 dark:text-zinc-100 font-space-grotesk font-bold text-sm uppercase tracking-widest mb-8">Contato</h4>
+<ul class="space-y-4 font-manrope font-light text-base">
+
+<li class="text-zinc-400">contato@casaechave.com.br</li>
+<li><a class="text-red-600 font-medium" href="#">Falar com Consultor</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-20 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex justify-between items-center max-w-[1440px] mx-auto">
+<p class="text-zinc-400 text-xs font-manrope">© 2026 casa e chave. Todos os direitos reservados.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-zinc-400 cursor-pointer hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="material-symbols-outlined text-zinc-400 cursor-pointer hover:text-primary transition-colors" data-icon="public">public</span>
+</div>
+</div>
+</footer>
+<script src="supabase-config.js"></script>
+<script src="index-script.js"></script>
+</body></html>

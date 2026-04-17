@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | Agendar Visita</title>
+<meta name="description" content="Agende uma visita exclusiva com os consultores da CasaeChave. Preencha seus dados e entraremos em contato."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": { "surface-container-high": "#e8e8e8", "primary": "#000000", "secondary-container": "#ced4e4", "surface-bright": "#f9f9f9", "tertiary-fixed": "#c00001", "on-secondary": "#ffffff", "surface-container-low": "#f3f3f4", "inverse-primary": "#c8c6c5", "primary-fixed-dim": "#474746", "tertiary-container": "#e8110a", "inverse-surface": "#2f3131", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "error-container": "#ffdad6", "surface-container": "#eeeeee", "tertiary-fixed-dim": "#930000", "on-surface-variant": "#474747", "secondary-fixed-dim": "#a4abbb", "on-secondary-fixed-variant": "#353c48", "on-background": "#1a1c1c", "background": "#f9f9f9", "on-tertiary-container": "#ffffff", "on-secondary-fixed": "#151c27", "surface-dim": "#dadada", "on-error": "#ffffff", "inverse-on-surface": "#f0f1f1", "secondary-fixed": "#c0c7d6", "primary-fixed": "#5f5e5e", "on-error-container": "#410002", "surface-variant": "#e2e2e2", "on-tertiary-fixed": "#ffffff", "on-primary-fixed": "#ffffff", "on-primary": "#e5e2e1", "on-tertiary-fixed-variant": "#ffdad4", "on-surface": "#1a1c1c", "outline-variant": "#c6c6c6", "surface-tint": "#5f5e5e", "surface-container-highest": "#e2e2e2", "primary-container": "#3c3b3b", "on-primary-fixed-variant": "#e5e2e1", "secondary": "#585f6c", "outline": "#777777", "on-secondary-container": "#151c27", "tertiary": "#7e0000", "on-primary-container": "#ffffff", "surface": "#f9f9f9", "on-tertiary": "#ffdad4" },
+              "fontFamily": { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }
+            }
+          }
+        }
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    body { font-family: 'Manrope', sans-serif; background-color: #f9f9f9; color: #1a1c1c; }
+    h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }
+</style>
+</head>
+<body class="bg-surface selection:bg-tertiary/10">
+
+<!-- Announcement Bar -->
+<div class="bg-primary text-on-primary py-3 px-6 text-center">
+<p class="font-label text-[10px] uppercase tracking-[0.2em] font-semibold">Condições exclusivas para lançamentos em Aracaju • Taxas reduzidas este mês</p>
+</div>
+
+<!-- Shared Component: TopNavBar -->
+<nav class="fixed top-12 w-full z-50 bg-white/80 dark:bg-black/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+<div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+<a href="index.html" class="text-2xl font-bold tracking-tighter text-zinc-950 uppercase font-headline">CasaeChave</a>
+<div class="hidden md:flex items-center gap-10 font-headline tracking-tight uppercase text-sm font-semibold">
+<a class="text-zinc-500 hover:text-zinc-950 transition-transform duration-300" href="index.html">Início</a>
+<a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="imoveis.html">Imóveis</a>
+<a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="projetos.html">Nossos Projetos</a>
+<a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="faq.html">FAQ</a>
+<a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="sobre.html">Sobre Nós</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider hover:scale-[1.02] transition-all">Agendar Visita</button>
+</div>
+</div>
+</nav>
+
+<!-- Page Content -->
+<main class="pt-40 pb-32 px-12 max-w-[1440px] mx-auto min-h-screen">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <!-- Hero Text Container -->
+        <div>
+            <h1 class="text-6xl font-headline font-bold leading-tight mb-8">Agende sua <br/>Visita Exclusiva.</h1>
+            <p class="text-zinc-500 font-body text-lg max-w-md mb-12">Nossa equipe de consultores especializados está pronta para apresentar pessoalmente os imóveis que definem a arte de morar bem.</p>
+            
+            <div class="space-y-8">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary mt-1">location_on</span>
+                    <div>
+                        <p class="font-headline font-bold text-lg">CasaeChave Office</p>
+                        <p class="text-zinc-500 text-sm">Av. Beira Mar, 1024, Sala 08 - Aracaju, SE</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary mt-1">coffee</span>
+                    <div>
+                        <p class="font-headline font-bold text-lg">Atendimento Premium</p>
+                        <p class="text-zinc-500 text-sm">Recepção reservada e discreta, para alinhar suas expectativas aos nossos lançamentos.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary mt-1">schedule</span>
+                    <div>
+                        <p class="font-headline font-bold text-lg">Retorno em até 30 minutos</p>
+                        <p class="text-zinc-500 text-sm">Após enviar seus dados, nosso consultor entrará em contato pelo WhatsApp informado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Form Container -->
+        <div class="bg-surface-container-lowest p-10 rounded-[12px] shadow-[0px_20px_40px_rgba(26,28,28,0.04)] ring-1 ring-zinc-200/50">
+            <h2 class="text-2xl font-headline font-bold mb-2">Preencha seus dados</h2>
+            <p class="text-zinc-400 font-body text-sm mb-8">Campos marcados com * são obrigatórios.</p>
+
+            <form id="form-agendamento" class="space-y-6">
+                <div>
+                    <label class="block text-[10px] uppercase font-label tracking-wide text-zinc-500 mb-2">Nome *</label>
+                    <input type="text" id="campo-nome" required class="w-full bg-surface-container-low border-0 px-4 py-3.5 rounded-md focus:ring-2 focus:ring-tertiary transition-all text-sm" placeholder="Seu nome completo">
+                </div>
+                
+                <div>
+                    <label class="block text-[10px] uppercase font-label tracking-wide text-zinc-500 mb-2">WhatsApp *</label>
+                    <input type="tel" id="campo-whatsapp" required class="w-full bg-surface-container-low border-0 px-4 py-3.5 rounded-md focus:ring-2 focus:ring-tertiary transition-all text-sm" placeholder="(79) 99999-9999" maxlength="15">
+                </div>
+                
+                <div>
+                    <label class="block text-[10px] uppercase font-label tracking-wide text-zinc-500 mb-2">Imóvel de Interesse *</label>
+                    <input type="text" id="campo-imovel" required class="w-full bg-surface-container-low border-0 px-4 py-3.5 rounded-md focus:ring-2 focus:ring-tertiary transition-all text-sm" placeholder="Ex: Residencial Orion, Apartamento no Jardins...">
+                </div>
+
+                <!-- Feedback Messages -->
+                <div id="msg-sucesso" class="hidden bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-lg text-sm font-body flex items-center gap-2">
+                    <span class="material-symbols-outlined text-emerald-600 text-lg">check_circle</span>
+                    Agendamento registrado com sucesso! Nosso consultor entrará em contato em breve.
+                </div>
+                <div id="msg-erro" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm font-body flex items-center gap-2">
+                    <span class="material-symbols-outlined text-red-600 text-lg">error</span>
+                    Ocorreu um erro ao enviar. Tente novamente.
+                </div>
+
+                <button type="submit" id="btn-enviar" class="w-full bg-primary text-white py-4 rounded-[12px] font-headline uppercase tracking-widest text-sm hover:bg-zinc-800 transition-colors mt-2 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-lg">calendar_month</span>
+                    Confirmar Agendamento
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Shared Component: Footer -->
+<footer class="bg-zinc-50 w-full py-24 px-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-20 max-w-[1440px] mx-auto">
+        <div class="col-span-1">
+            <div class="font-headline font-bold text-xl uppercase tracking-widest text-zinc-950 mb-8">CasaeChave</div>
+            <p class="text-zinc-400 font-body font-light text-sm leading-relaxed">A curadoria definitiva para o mercado imobiliário premium em Sergipe. Transformando espaços em legados arquitetônicos.</p>
+        </div>
+        <div>
+            <h4 class="text-zinc-900 font-headline font-bold text-sm uppercase tracking-widest mb-8">Menu</h4>
+            <ul class="space-y-4 font-body font-light text-base text-zinc-400">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="imoveis.html">Imóveis</a></li>
+                <li><a href="projetos.html">Nossos Projetos</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-zinc-900 font-headline font-bold text-sm uppercase tracking-widest mb-8">Informações</h4>
+            <ul class="space-y-4 font-body font-light text-base text-zinc-400">
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="sobre.html">Sobre Nós</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-zinc-900 font-headline font-bold text-sm uppercase tracking-widest mb-8">Contato</h4>
+            <ul class="space-y-4 font-body font-light text-base">
+                <li class="text-zinc-400">Av. Beira Mar, 1024<br/>Aracaju - SE</li>
+                <li class="text-zinc-400">contato@casaechave.com.br</li>
+                <li><a class="text-red-600 font-medium" href="#">Falar com Consultor</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script src="supabase-config.js"></script>
+<script>
+// Máscara de telefone brasileiro (79) 99999-9999
+const campoWhatsapp = document.getElementById('campo-whatsapp');
+campoWhatsapp.addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
+    if (v.length > 11) v = v.substring(0, 11); // Máximo 11 dígitos
+
+    if (v.length > 6) {
+        v = `(${v.substring(0,2)}) ${v.substring(2,7)}-${v.substring(7)}`;
+    } else if (v.length > 2) {
+        v = `(${v.substring(0,2)}) ${v.substring(2)}`;
+    } else if (v.length > 0) {
+        v = `(${v}`;
+    }
+    e.target.value = v;
+});
+
+// Submissão do formulário — salva no banco de dados (tabela leads)
+const form = document.getElementById('form-agendamento');
+const btnEnviar = document.getElementById('btn-enviar');
+const msgSucesso = document.getElementById('msg-sucesso');
+const msgErro = document.getElementById('msg-erro');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Esconde mensagens anteriores
+    msgSucesso.classList.add('hidden');
+    msgErro.classList.add('hidden');
+
+    // Desabilita botão
+    btnEnviar.innerHTML = '<span class="material-symbols-outlined text-lg animate-spin">progress_activity</span> Enviando...';
+    btnEnviar.disabled = true;
+
+    const nome = document.getElementById('campo-nome').value.trim();
+    const telefone = document.getElementById('campo-whatsapp').value.trim();
+    const imovelInteresse = document.getElementById('campo-imovel').value.trim();
+
+    try {
+        const { error } = await sb
+            .from('leads')
+            .insert([{
+                nome: nome,
+                telefone: telefone,
+                mensagem: imovelInteresse,
+                origem: 'Agendar Visita'
+            }]);
+
+        if (error) throw error;
+
+        // Sucesso
+        msgSucesso.classList.remove('hidden');
+        form.reset();
+
+    } catch (error) {
+        console.error('Erro ao salvar lead:', error);
+        msgErro.classList.remove('hidden');
+    } finally {
+        btnEnviar.innerHTML = '<span class="material-symbols-outlined text-lg">calendar_month</span> Confirmar Agendamento';
+        btnEnviar.disabled = false;
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CasaeChave | Admin - Cadastrar Corretor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = { theme: { extend: { colors: { "primary": "#000000", "surface": "#f9f9f9", "surface-container-lowest": "#ffffff" }, fontFamily: { "headline": ["Space Grotesk", "sans-serif"], "body": ["Manrope", "sans-serif"], "label": ["Inter", "sans-serif"] }}}}</script>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: bottom; } body { font-family: 'Manrope', sans-serif; background-color: #f3f4f6; color: #1a1c1c; } h1, h2, h3, .headline { font-family: 'Space Grotesk', sans-serif; }</style>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="flex min-h-screen">
+
+<!-- Admin Sidebar -->
+<aside class="w-64 bg-black text-white flex flex-col justify-between fixed h-full z-50">
+    <div class="p-8">
+        <div class="text-xl font-bold uppercase font-headline mb-16 tracking-widest text-[#ff291b]">CasaeChave<br><span class="text-white text-sm font-light tracking-normal">Sistema CMS</span></div>
+        <nav class="space-y-6">
+            <a href="admin-dashboard.html" class="flex items-center gap-3 text-zinc-400 hover:text-white transition"><span class="material-symbols-outlined">dashboard</span> Visão Geral</a>
+            <a href="admin-cadastrar.html" class="flex items-center gap-3 text-zinc-400 hover:text-white transition"><span class="material-symbols-outlined">add_business</span> Cadastrar Imóvel</a>
+            <a href="admin-portfolio.html" class="flex items-center gap-3 text-zinc-400 hover:text-white transition"><span class="material-symbols-outlined">list</span> Portfólio Ativo</a>
+            <a href="admin-leads.html" class="flex items-center gap-3 text-zinc-400 hover:text-white transition"><span class="material-symbols-outlined">group</span> Contatos (Leads)</a>
+            <a href="admin-corretores.html" class="flex items-center gap-3 text-white font-bold transition"><span class="material-symbols-outlined">person_add</span> Cadastrar Corretor</a>
+            <a href="#" id="btn-sair" class="flex items-center gap-3 text-zinc-500 hover:text-[#ff291b] transition pt-6 mt-4 border-t border-zinc-800"><span class="material-symbols-outlined">logout</span> Sair do Sistema</a>
+        </nav>
+    <div class="p-8 border-t border-zinc-800 flex items-center justify-between cursor-pointer hover:bg-zinc-900 transition" onclick="document.getElementById('modal-perfil').classList.remove('hidden')">
+        <div class="flex items-center gap-3">
+            <img id="sidebar-foto" src="https://ui-avatars.com/api/?name=U&background=333&color=fff" class="w-10 h-10 rounded-full object-cover border border-zinc-700">
+            <div>
+                <p id="sidebar-nome" class="text-xs font-bold uppercase tracking-widest text-white truncate max-w-[120px]">Carregando...</p>
+                <p id="sidebar-role" class="text-[10px] text-zinc-500">Sistema CMS</p>
+            </div>
+        </div>
+        <span class="material-symbols-outlined text-zinc-500 text-sm">settings</span>
+    </div>
+</aside>
+
+<!-- MODAL DE PERFIL DO CORRETOR -->
+<div id="modal-perfil" class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full relative">
+        <button onclick="document.getElementById('modal-perfil').classList.add('hidden')" class="absolute top-4 right-4 text-zinc-400 hover:text-black">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <h3 class="text-2xl font-headline font-bold mb-1">Seu Perfil</h3>
+        <p class="text-xs text-zinc-500 mb-6 font-light">Estes dados aparecerão publicamente na página dos seus imóveis.</p>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-[10px] uppercase font-label text-zinc-500 mb-2 font-bold tracking-widest">Foto de Perfil</label>
+                <input type="file" id="perfil-upload" accept="image/*" class="w-full text-xs">
+            </div>
+            <div>
+                <label class="block text-[10px] uppercase font-label text-zinc-500 mb-2 font-bold tracking-widest">Seu Nome</label>
+                <input type="text" id="perfil-nome-input" placeholder="Ex: Thiago Alves" class="w-full border border-zinc-300 rounded-md p-2 text-sm focus:border-black outline-none">
+            </div>
+            <div>
+                <label class="block text-[10px] uppercase font-label text-zinc-500 mb-2 font-bold tracking-widest">WhatsApp (Com DDD)</label>
+                <input type="text" id="perfil-wpp-input" placeholder="Ex: 79999999999" class="w-full border border-zinc-300 rounded-md p-2 text-sm focus:border-black outline-none">
+            </div>
+            <button onclick="salvarPerfilCorretor()" class="w-full bg-black hover:bg-[#ff291b] text-white py-3 rounded-md text-xs font-bold font-label uppercase tracking-widest transition mt-4">
+                Salvar Meu Perfil
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Main -->
+<main class="ml-64 w-full p-12">
+    <div class="max-w-[700px] mx-auto">
+        
+        <header class="mb-10">
+            <h1 class="text-3xl font-headline font-bold">Cadastrar Novo Corretor</h1>
+            <p class="text-zinc-500 mt-2 text-sm">Adicione um novo corretor à equipe. Ele receberá acesso ao painel CMS.</p>
+        </header>
+
+        <form id="form-corretor" class="space-y-8 bg-white p-8 rounded-[12px] shadow-sm border border-zinc-200">
+            <div class="grid grid-cols-1 gap-6">
+                <div>
+                    <label class="block text-xs uppercase font-label text-zinc-500 mb-2">E-mail do Corretor</label>
+                    <input type="email" id="email" required class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="Ex: corretor@casaechaves.com.br">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase font-label text-zinc-500 mb-2">Senha Provisória</label>
+                    <input type="password" id="senha" required class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="Mínimo 6 caracteres">
+                </div>
+            </div>
+
+            <button type="submit" id="btn-cadastrar" class="w-full bg-black hover:bg-[#ff291b] text-white py-4 rounded-lg text-sm font-bold uppercase tracking-widest font-label transition mt-8">
+                Criar Acesso do Corretor
+            </button>
+            <p class="text-xs text-center text-zinc-400 mt-4">Nota: Devido às regras de segurança, ao cadastrar um novo corretor por aqui, você será deslogado e o novo corretor fará login automaticamente. Você pode relogar como admin depois.</p>
+        </form>
+
+    </div>
+</main>
+
+<script src="supabase-config.js"></script>
+<script src="admin-corretores-script.js"></script>
+</body>
+</html>
