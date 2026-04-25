@@ -3,11 +3,21 @@
 <html lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CasaeChave | Architectural Monolith</title>
+
+<title>Imóveis de Alto Padrão em Aracaju | CasaeChave</title>
+<meta name="description" content="Encontre os melhores imóveis para compra e locação em Aracaju. Casas, apartamentos e lançamentos nos melhores bairros de Sergipe com a CasaeChave.">
+<link rel="canonical" href="https://casaechave.com.br/" />
+
+<!-- Open Graph / WhatsApp / Instagram -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Imóveis de Alto Padrão em Aracaju | CasaeChave">
+<meta property="og:description" content="A arte de morar bem. Explore nosso catálogo exclusivo de imóveis em Aracaju e Barra dos Coqueiros.">
+<meta property="og:url" content="https://casaechave.com.br/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200">
+
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&amp;family=Manrope:wght@200;300;400;500&amp;family=Inter:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
           darkMode: "class",
@@ -123,13 +133,13 @@
 <!-- Hero Section -->
 <section class="relative min-h-[921px] flex items-center px-12 overflow-hidden">
 <div class="absolute inset-0 z-0">
-<img class="w-full h-full object-cover" data-alt="Modern geometric luxury home with pool at dusk" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=100&w=2560"/>
+<img class="w-full h-full object-cover" alt="Casa de luxo com design moderno e piscina à venda no bairro Jardins, Aracaju" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=100&w=2560"/>
 <div class="absolute inset-0 bg-black/40"></div>
 </div>
 <div class="container mx-auto relative z-10 editorial-grid">
 <div class="col-start-1 col-span-8 lg:col-span-6 pt-20">
 <h1 class="text-[clamp(3rem,8vw,5.5rem)] leading-[0.9] font-bold tracking-tighter text-white drop-shadow-2xl">
-                        A ARTE DE <br/> MORAR BEM.
+                        Imóveis de Alto Padrão e Lançamentos em Aracaju
                     </h1>
 </div>
 
@@ -178,7 +188,7 @@
 <section class="py-32 px-12 max-w-[1440px] mx-auto">
 <div class="flex justify-between items-end mb-16 w-full gap-8">
 <div>
-<h2 class="text-4xl font-headline font-bold tracking-tight">Imóveis que podem te interessar</h2>
+<h2 class="text-4xl font-headline font-bold tracking-tight">Explore nosso Catálogo Exclusivo de Imóveis</h2>
 <p class="text-zinc-500 font-body font-light mt-4 max-w-lg">Curadoria exclusiva dos imóveis mais desejados de Aracaju, selecionados por nossa equipe de arquitetura e design.</p>
 </div>
 <a class="text-xs font-label uppercase tracking-widest border-b border-primary pb-1 hover:text-tertiary hover:border-tertiary transition-all whitespace-nowrap" href="imoveis.html">Ver todos</a>
@@ -195,7 +205,7 @@
 <section class="py-32 px-12 max-w-[1440px] mx-auto border-t border-zinc-100">
 <div class="flex justify-between items-end mb-16">
 <div>
-<h2 class="text-4xl font-headline font-bold mb-4">Imóveis para Locação</h2>
+<h2 class="text-4xl font-headline font-bold mb-4">Imóveis para Locação em Aracaju</h2>
 <p class="text-zinc-500 font-body font-light text-lg">As melhores opções para alugar com conforto e segurança.</p>
 </div>
 <a class="hidden md:flex items-center gap-2 text-primary font-label uppercase tracking-widest text-xs font-bold hover:gap-4 transition-all" href="imoveis.html?locacao=true">
@@ -212,7 +222,7 @@
 <!-- Neighborhoods -->
 <section class="bg-surface-container-low py-32 px-12">
 <div class="max-w-[1440px] mx-auto">
-<h2 class="text-4xl font-headline font-bold mb-16 text-center">Explore os bairros de Aracaju</h2>
+<h2 class="text-4xl font-headline font-bold mb-16 text-center">Explore os melhores bairros de Aracaju e Barra dos Coqueiros</h2>
 <div id="bairros-grid" class="grid grid-cols-1 md:grid-cols-4 gap-6">
 <!-- Skeleton loading -->
 <div class="animate-pulse aspect-square bg-zinc-200 rounded-lg"></div>
@@ -224,16 +234,16 @@
 </section>
 <!-- Agents Section -->
 <section class="py-32 px-12 max-w-[1440px] mx-auto text-center">
-<h2 class="text-4xl font-headline font-bold mb-4">Venda com os melhores corretores</h2>
+<h2 class="text-4xl font-headline font-bold mb-4">Venda seu imóvel com os melhores corretores de Sergipe</h2>
 <p class="text-zinc-500 font-body font-light mb-16 max-w-xl mx-auto">Nossos especialistas estão prontos para oferecer um atendimento personalizado e estratégico para a venda do seu imóvel.</p>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
 <div class="flex flex-col items-center">
-<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" data-alt="Corretor parceiro CasaeChave" src="assets/corretor.jpg"/>
+<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" alt="Foto do corretor parceiro especialista em imóveis na CasaeChave" src="assets/corretor.jpg"/>
 <p class="font-headline font-bold text-xl">Diretor de Vendas</p>
 <p class="text-sm font-label uppercase tracking-widest text-zinc-400 mt-1">Especialista em Alto Padrão</p>
 </div>
 <div class="flex flex-col items-center">
-<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" data-alt="Corretora parceira CasaeChave" src="assets/corretora.jpg"/>
+<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" alt="Foto da corretora parceira especialista em imóveis na CasaeChave" src="assets/corretora.jpg"/>
 <p class="font-headline font-bold text-xl">Diretora Comercial</p>
 <p class="text-sm font-label uppercase tracking-widest text-zinc-400 mt-1">Lançamentos Exclusivos</p>
 </div>
@@ -275,7 +285,7 @@
 <a href="blog-investir-aracaju.html" class="block">
 <article class="group">
 <div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vista aérea de Aracaju com prédios modernos e o rio Sergipe ao fundo" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"/>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vista aérea da cidade de Aracaju com prédios modernos residenciais e o rio Sergipe ao fundo" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"/>
 </div>
 <span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Investimento</span>
 <h3 class="text-xl font-headline font-bold mt-2 mb-4">Por que investir em imóveis em Aracaju?</h3>
@@ -286,7 +296,7 @@
 <a href="blog-qualidade-vida.html" class="block">
 <article class="group">
 <div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Orla de Aracaju ao pôr do sol com coqueiros e ciclovia" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"/>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Orla de Atalaia em Aracaju ao pôr do sol, ideal para morar com qualidade de vida" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"/>
 </div>
 <span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Lifestyle</span>
 <h3 class="text-xl font-headline font-bold mt-2 mb-4">Qualidade de vida em Aracaju</h3>
@@ -297,7 +307,7 @@
 <a href="blog-barra-dos-coqueiros.html" class="block">
 <article class="group">
 <div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Ponte Construtor João Alves ligando Aracaju à Barra dos Coqueiros ao entardecer" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"/>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Ponte Construtor João Alves ligando Aracaju à Barra dos Coqueiros, região de grande valorização imobiliária" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"/>
 </div>
 <span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Expansão</span>
 <h3 class="text-xl font-headline font-bold mt-2 mb-4">O crescimento da Barra dos Coqueiros/SE</h3>
@@ -354,4 +364,28 @@
 </footer>
 <script src="supabase-config.js"></script>
 <script src="index-script.js"></script>
+
+<!-- Schema.org — Dados Estruturados para o Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "CasaeChave",
+  "image": "https://casaechave.com.br/assets/logo.png",
+  "url": "https://casaechave.com.br",
+  "telephone": "+5579999999999",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Beira Mar, 1024, Sala 08",
+    "addressLocality": "Aracaju",
+    "addressRegion": "SE",
+    "addressCountry": "BR"
+  },
+  "description": "Especialistas em imóveis de alto padrão, compra, venda e locação em Aracaju e Barra dos Coqueiros.",
+  "areaServed": {
+    "@type": "City",
+    "name": "Aracaju"
+  }
+}
+</script>
 </body></html>

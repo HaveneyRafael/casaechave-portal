@@ -279,15 +279,39 @@
             "url": window.location.href
         };
 
+        // Offers (preço de venda e/ou aluguel)
         if (imovel.valor_venda) {
-            schemaData.price = imovel.valor_venda;
-            schemaData.priceCurrency = "BRL";
+            schemaData.offers = {
+                "@type": "Offer",
+                "priceCurrency": "BRL",
+                "price": imovel.valor_venda
+            };
+        } else if (imovel.valor_aluguel) {
+            schemaData.offers = {
+                "@type": "Offer",
+                "priceCurrency": "BRL",
+                "price": imovel.valor_aluguel
+            };
         }
 
+        // Imagens
         if (imovel.imagens && imovel.imagens.length > 0) {
             schemaData.image = imovel.imagens;
         }
 
+        // Detalhes do imóvel
+        if (imovel.suites) {
+            schemaData.numberOfRooms = imovel.suites;
+        }
+        if (imovel.area_m2) {
+            schemaData.floorSize = {
+                "@type": "QuantitativeValue",
+                "value": imovel.area_m2,
+                "unitCode": "MTK"
+            };
+        }
+
+        // Endereço
         schemaData.address = {
             "@type": "PostalAddress",
             "addressLocality": "Aracaju",
