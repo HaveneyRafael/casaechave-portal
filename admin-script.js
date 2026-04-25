@@ -33,21 +33,79 @@ imagensUpload.addEventListener('change', (e) => {
     atualizarPreview();
 });
 
-function atualizarPreview() {
-    previewContainer.innerHTML = '';
-    imagensSelecionadas.forEach((file, index) => {
+// =============================================
+// DRAG-AND-DROP: Reordenação de fotos
+// =============================================
+let dragSrcIndex = null;
+
+function criarItemDraggable(file, index) {
+    return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const div = document.createElement('div');
-            div.className = 'relative w-24 h-24 m-1 rounded overflow-hidden border border-zinc-200';
+            div.className = 'relative w-28 h-28 m-1 rounded-lg overflow-hidden border-2 border-zinc-200 cursor-grab group transition-all duration-200';
+            div.draggable = true;
+            div.dataset.index = index;
             div.innerHTML = `
-                <img src="${e.target.result}" class="w-full h-full object-cover" />
-                <button type="button" class="absolute top-1 right-1 bg-red-500 text-white w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold" onclick="removerImagem(${index})">X</button>
+                <img src="${e.target.result}" class="w-full h-full object-cover pointer-events-none" />
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors pointer-events-none"></div>
+                <span class="absolute top-1.5 left-1.5 bg-black/70 text-white text-[10px] font-bold px-1.5 py-0.5 rounded pointer-events-none">${index + 1}</span>
+                <button type="button" class="absolute top-1 right-1 bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center font-bold transition-colors" onclick="removerImagem(${index})">✕</button>
+                <span class="material-symbols-outlined absolute bottom-1.5 left-1/2 -translate-x-1/2 text-white/70 text-sm pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">drag_indicator</span>
             `;
-            previewContainer.appendChild(div);
-        }
+
+            // Eventos de drag
+            div.addEventListener('dragstart', (ev) => {
+                dragSrcIndex = parseInt(ev.currentTarget.dataset.index);
+                ev.currentTarget.style.opacity = '0.4';
+                ev.currentTarget.classList.add('border-[#ff291b]');
+                ev.dataTransfer.effectAllowed = 'move';
+            });
+
+            div.addEventListener('dragend', (ev) => {
+                ev.currentTarget.style.opacity = '1';
+                ev.currentTarget.classList.remove('border-[#ff291b]');
+                // Remove highlight de todos
+                previewContainer.querySelectorAll('[draggable]').forEach(el => {
+                    el.classList.remove('border-[#ff291b]', 'border-dashed', 'scale-105');
+                });
+            });
+
+            div.addEventListener('dragover', (ev) => {
+                ev.preventDefault();
+                ev.dataTransfer.dropEffect = 'move';
+                ev.currentTarget.classList.add('border-[#ff291b]', 'border-dashed', 'scale-105');
+            });
+
+            div.addEventListener('dragleave', (ev) => {
+                ev.currentTarget.classList.remove('border-[#ff291b]', 'border-dashed', 'scale-105');
+            });
+
+            div.addEventListener('drop', (ev) => {
+                ev.preventDefault();
+                ev.stopPropagation();
+                const dropIndex = parseInt(ev.currentTarget.dataset.index);
+                if (dragSrcIndex !== null && dragSrcIndex !== dropIndex) {
+                    // Reordenar o array
+                    const [moved] = imagensSelecionadas.splice(dragSrcIndex, 1);
+                    imagensSelecionadas.splice(dropIndex, 0, moved);
+                    atualizarPreview();
+                }
+                dragSrcIndex = null;
+            });
+
+            resolve(div);
+        };
         reader.readAsDataURL(file);
     });
+}
+
+async function atualizarPreview() {
+    previewContainer.innerHTML = '';
+    for (let i = 0; i < imagensSelecionadas.length; i++) {
+        const item = await criarItemDraggable(imagensSelecionadas[i], i);
+        previewContainer.appendChild(item);
+    }
 }
 
 // Global function to remove an image from the preview
@@ -105,9 +163,12 @@ formCadastrar.addEventListener('submit', async (e) => {
     const valor_aluguel = document.getElementById('valor_aluguel').value ? parseFloat(document.getElementById('valor_aluguel').value) : null;
     const status = document.getElementById('status').value;
     const area_m2 = parseFloat(document.getElementById('area_m2').value);
+    const quartos = document.getElementById('quartos').value ? parseInt(document.getElementById('quartos').value) : 0;
     const suites = parseInt(document.getElementById('suites').value);
+    const banheiros = document.getElementById('banheiros').value ? parseInt(document.getElementById('banheiros').value) : 0;
     const vagas = parseInt(document.getElementById('vagas').value);
     const valor_condominio = document.getElementById('valor_condominio').value ? parseFloat(document.getElementById('valor_condominio').value) : null;
+    const valor_iptu = document.getElementById('valor_iptu').value ? parseFloat(document.getElementById('valor_iptu').value) : null;
     const descricao = document.getElementById('descricao').value;
     
     // Processar Infraestrutura de string separada por virgula para Array
@@ -127,7 +188,7 @@ formCadastrar.addEventListener('submit', async (e) => {
 
         // 3. Gerar campos SEO automaticamente
         btnPublicar.innerText = 'Gerando SEO...';
-        const dadosImovel = { titulo, bairro, tipo, valor_venda, valor_aluguel, status, area_m2, suites, vagas, valor_condominio, descricao };
+        const dadosImovel = { titulo, bairro, tipo, valor_venda, valor_aluguel, status, area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu, descricao };
         const seoData = SEO.gerarCamposSEO(dadosImovel);
 
         // 4. Inserir no Banco de Dados usando o perfil autenticado da base
@@ -143,7 +204,7 @@ formCadastrar.addEventListener('submit', async (e) => {
             .from('imoveis')
             .insert([{
                 titulo, corretor, corretor_foto, corretor_whatsapp, bairro, tipo, valor_venda, valor_aluguel, status, 
-                area_m2, suites, vagas, valor_condominio, 
+                area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu,
                 descricao, infraestrutura, imagens: arrayImagensUrls,
                 slug: seoData.slug,
                 seo_titulo: seoData.seo_titulo,

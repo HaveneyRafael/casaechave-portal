@@ -120,11 +120,14 @@
             <!-- Sec 2: Especificações -->
             <div class="bg-white p-8 rounded-[12px] shadow-sm border border-zinc-200">
                 <h2 class="text-xl font-bold mb-6 border-b border-zinc-100 pb-4">2. Especificações Técnicas</h2>
-                <div class="grid grid-cols-4 gap-6">
+                <div class="grid grid-cols-3 gap-6">
                     <div><label class="block text-xs uppercase font-label text-zinc-500 mb-2">Área M²</label><input type="number" id="area_m2" required class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="0"></div>
+                    <div><label class="block text-xs uppercase font-label text-zinc-500 mb-2">Quartos</label><input type="number" id="quartos" class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="0" min="0"></div>
                     <div><label class="block text-xs uppercase font-label text-zinc-500 mb-2">Suítes</label><input type="number" id="suites" required class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="0"></div>
+                    <div><label class="block text-xs uppercase font-label text-zinc-500 mb-2">Banheiros</label><input type="number" id="banheiros" class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="0" min="0"></div>
                     <div><label class="block text-xs uppercase font-label text-zinc-500 mb-2">Vagas</label><input type="number" id="vagas" required class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="0"></div>
                     <div><label class="block text-xs uppercase font-label text-zinc-500 mb-2">Condomínio (R$)</label><input type="number" id="valor_condominio" class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="0"></div>
+                    <div><label class="block text-xs uppercase font-label text-zinc-500 mb-2">IPTU Anual (R$)</label><input type="number" id="valor_iptu" class="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-lg text-sm" placeholder="Opcional"></div>
                 </div>
                 
                 <div class="mt-8">
@@ -143,10 +146,11 @@
                 <h2 class="text-xl font-bold border-b border-zinc-100 pb-4 flex justify-between">
                     <span>3. Galeria de Imagens</span>
                 </h2>
-                <p class="text-xs text-zinc-500 mb-6 font-light mt-2">As fotos abaixo já pertencem ao imóvel. Se você subir fotos novas, elas serão <strong>ADICIONADAS</strong> (no final da lista).</p>
+                <p class="text-xs text-zinc-500 mb-2 font-light mt-2">As fotos abaixo já pertencem ao imóvel. Se você subir fotos novas, elas serão <strong>ADICIONADAS</strong> (no final da lista).</p>
+                <p class="text-xs text-zinc-400 mb-6 flex items-center gap-1"><span class="material-symbols-outlined text-sm">drag_indicator</span> Arraste as fotos para reordenar. A primeira foto será a capa do imóvel.</p>
 
                 <!-- Container das Fotos ANTIGAS -->
-                <div id="fotos-antigas" class="mb-4 flex flex-wrap gap-2 text-sm text-zinc-400">
+                <div id="fotos-antigas" class="mb-4 flex flex-wrap gap-3 text-sm text-zinc-400">
                     Buscando imagens...
                 </div>
 
@@ -155,7 +159,7 @@
                     <span class="material-symbols-outlined text-4xl text-zinc-400 mb-2">add_photo_alternate</span>
                     <p class="text-zinc-600 font-bold">Clique aqui para adicionar MAIS fotos</p>
                     <p class="text-sm text-zinc-400">Ao salvar, elas vão para a galeria pública.</p>
-                    <div id="preview-imagens" class="mt-4 flex flex-wrap gap-2 justify-center"></div>
+                    <div id="preview-imagens" class="mt-4 flex flex-wrap gap-3 justify-center"></div>
                 </div>
             </div>
 

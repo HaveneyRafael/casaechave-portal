@@ -47,11 +47,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('detalhe-preco').innerText = 'Consulte';
         }
         document.getElementById('detalhe-area').innerText = `${imovel.area_m2} m²`;
+        document.getElementById('detalhe-quartos').innerText = imovel.quartos ? `${imovel.quartos} Quarto(s)` : '—';
         document.getElementById('detalhe-suites').innerText = `${imovel.suites} Suíte(s)`;
+        document.getElementById('detalhe-banheiros').innerText = imovel.banheiros ? `${imovel.banheiros} Banheiro(s)` : '—';
         document.getElementById('detalhe-vagas').innerText = `${imovel.vagas} Vaga(s)`;
         
         if(imovel.valor_condominio) {
             document.getElementById('detalhe-condominio').innerText = formatter.format(imovel.valor_condominio);
+        }
+
+        if(imovel.valor_iptu) {
+            document.getElementById('detalhe-iptu').innerText = formatter.format(imovel.valor_iptu);
+        } else {
+            document.getElementById('detalhe-iptu').innerText = '—';
         }
 
         // Descrição suportando quebra de linha (sanitizada contra XSS)
