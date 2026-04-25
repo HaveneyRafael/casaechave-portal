@@ -220,8 +220,9 @@ formCadastrar.addEventListener('submit', async (e) => {
         atualizarPreview();
 
     } catch (err) {
-        if (typeof console !== 'undefined') console.warn('Erro no cadastro de imóvel.');
-        alert('Erro ao cadastrar imóvel. Verifique sua conexão e tente novamente.');
+        if (typeof console !== 'undefined') console.warn('Erro no cadastro de imóvel:', err);
+        const detalhe = err?.message || err?.details || JSON.stringify(err);
+        alert('Erro ao cadastrar imóvel:\n\n' + detalhe);
     } finally {
         btnPublicar.innerText = 'Publicar Imóvel';
         btnPublicar.disabled = false;
