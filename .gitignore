@@ -1,6 +1,9 @@
 # OS
 .DS_Store
 
+# Node
+node_modules/
+
 # Secrets & API keys
 generate_stitch_pages.sh
 .stitch_projects.json
