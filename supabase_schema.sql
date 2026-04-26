@@ -14,18 +14,28 @@ CREATE TABLE IF NOT EXISTS public.imoveis (
     valor_aluguel NUMERIC(15, 2),
     status TEXT NOT NULL, -- Ex: Lançamento, Pronto, Em Construção
     area_m2 NUMERIC(10, 2) NOT NULL,
+    quartos INTEGER DEFAULT 0, -- Quantidade de quartos
     suites INTEGER NOT NULL DEFAULT 0,
+    banheiros INTEGER DEFAULT 0, -- Quantidade de banheiros
     vagas INTEGER NOT NULL DEFAULT 0,
     valor_condominio NUMERIC(10, 2),
+    valor_iptu NUMERIC(10, 2), -- IPTU anual
     descricao TEXT,
+    infraestrutura TEXT[], -- Array de itens de infraestrutura do empreendimento
     imagens TEXT[], -- Array de URLs de imagens armazenadas no Supabase Storage
     destaque BOOLEAN DEFAULT false, -- Para mostrar na página inicial
+    corretor TEXT, -- Nome do corretor responsável
+    corretor_foto TEXT, -- URL da foto do corretor
+    corretor_whatsapp TEXT, -- WhatsApp do corretor
     slug TEXT, -- URL amigável gerada automaticamente
     seo_titulo TEXT, -- Title tag gerado automaticamente
     seo_descricao TEXT, -- Descrição SEO gerada automaticamente (150-200 palavras)
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- Índice único no slug para URLs amigáveis
+CREATE UNIQUE INDEX IF NOT EXISTS idx_imoveis_slug ON public.imoveis (slug) WHERE slug IS NOT NULL;
 
 -- 2. Tabela de Leads / Contatos (Para armazenar quem agenda visitas ou pergunta sobre imóveis)
 CREATE TABLE IF NOT EXISTS public.leads (
