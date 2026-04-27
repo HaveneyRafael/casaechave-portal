@@ -16,7 +16,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Define Estado Inicial via URL
     if (urlTipo) filtroTipoEl.value = urlTipo;
-    if (urlBairro) filtroBairroEl.value = urlBairro;
+    if (urlBairro) {
+        let optionExists = Array.from(filtroBairroEl.options).some(opt => opt.value === urlBairro);
+        if (!optionExists) {
+            const newOption = document.createElement('option');
+            newOption.value = urlBairro;
+            newOption.textContent = urlBairro;
+            filtroBairroEl.appendChild(newOption);
+        }
+        filtroBairroEl.value = urlBairro;
+    }
     
     // O valor de locação mantemos globalmente na página
     let isLocacao = urlLocacao;
