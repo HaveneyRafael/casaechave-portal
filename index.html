@@ -95,7 +95,9 @@
 <label class="block text-[10px] font-label uppercase tracking-widest text-zinc-400 mb-3">Localização</label>
 <div class="flex items-center">
 <span class="material-symbols-outlined text-zinc-400 mr-2" data-icon="location_on">location_on</span>
-<input id="filtro-localizacao" class="w-full border-0 border-b border-zinc-200 focus:ring-0 focus:border-primary py-2 font-body text-zinc-900 bg-transparent" placeholder="Bairro ou Condomínio" type="text"/>
+<select id="filtro-localizacao" class="w-full border-0 border-b border-zinc-200 focus:ring-0 focus:border-primary py-2 font-body text-zinc-900 bg-transparent cursor-pointer">
+<option value="">Carregando bairros...</option>
+</select>
 </div>
 </div>
 <button id="btn-buscar" class="bg-primary text-white w-full lg:w-48 py-5 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 transition-all font-label text-xs uppercase tracking-widest">
@@ -282,8 +284,8 @@
 </div>
 </div>
 </footer>
-<script src="supabase-config.js?v=5"></script>
-<script src="index-script.js?v=5"></script>
+<script src="supabase-config.js?v=6"></script>
+<script src="index-script.js?v=6"></script>
 
 <!-- Schema.org — Dados Estruturados para o Google -->
 <script type="application/ld+json">
