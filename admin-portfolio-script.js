@@ -72,6 +72,15 @@ function desenharTabela(listaImoveis) {
             botaoExcluir = `<span class="text-[10px] text-zinc-300 uppercase tracking-widest font-label mt-2 block">Sem Permissão</span>`;
         }
 
+        let precoVisualizacao = '';
+        if (imovel.valor_venda > 0 && imovel.valor_aluguel > 0) {
+            precoVisualizacao = `<div class="flex flex-col"><span class="text-xs text-zinc-500 font-normal">Venda: ${formatter.format(imovel.valor_venda)}</span><span>Locação: ${formatter.format(imovel.valor_aluguel)}</span></div>`;
+        } else if (imovel.valor_aluguel > 0) {
+            precoVisualizacao = `<span class="text-tertiary">Locação: ${formatter.format(imovel.valor_aluguel)}</span>`;
+        } else {
+            precoVisualizacao = formatter.format(imovel.valor_venda || 0);
+        }
+
         tr.innerHTML = `
             <td class="p-4 align-top w-28 cursor-pointer hover:opacity-80 transition" title="Clique para editar" onclick="window.location.href='admin-editar.html?id=${imovel.id}'">
                 <div class="flex flex-col items-start gap-2">
@@ -84,7 +93,7 @@ function desenharTabela(listaImoveis) {
                 <p class="text-xs text-zinc-500 uppercase tracking-widest font-label">${sanitizeHTML(imovel.tipo)} • ${sanitizeHTML(imovel.bairro)}</p>
             </td>
             <td class="p-4 align-top">
-                <p class="font-bold whitespace-nowrap text-zinc-800">${formatter.format(imovel.valor_venda)}</p>
+                <div class="font-bold whitespace-nowrap text-zinc-800">${precoVisualizacao}</div>
             </td>
             <td class="p-4 align-top">
                 <select onchange="atualizarStatus('${imovel.id}', this.value)" class="bg-surface-container-low border border-zinc-200 py-1.5 px-3 rounded-md text-xs font-label uppercase tracking-widest text-zinc-600 focus:border-black outline-none cursor-pointer">

@@ -168,6 +168,15 @@ function desenharTabelaValores(lista) {
         
         const corretorDisplay = imovel.corretor ? sanitizeHTML(imovel.corretor) : '<span class="text-zinc-400 italic">Sem Captador</span>';
 
+        let precoVisualizacao = '';
+        if (imovel.valor_venda > 0 && imovel.valor_aluguel > 0) {
+            precoVisualizacao = `<div class="flex flex-col"><span class="text-xs text-zinc-500 font-normal">Venda: ${formatterMoeda.format(imovel.valor_venda)}</span><span>Locação: ${formatterMoeda.format(imovel.valor_aluguel)}</span></div>`;
+        } else if (imovel.valor_aluguel > 0) {
+            precoVisualizacao = `<span class="text-tertiary">Locação: ${formatterMoeda.format(imovel.valor_aluguel)}</span>`;
+        } else {
+            precoVisualizacao = formatterMoeda.format(imovel.valor_venda || 0);
+        }
+
         tr.innerHTML = `
             <td class="py-4 px-6 font-bold text-black max-w-[200px] truncate" title="${sanitizeHTML(imovel.titulo)}">
                 ${sanitizeHTML(imovel.titulo)}
@@ -185,7 +194,7 @@ function desenharTabelaValores(lista) {
                 ${imovel.suites} Suíte(s) • ${imovel.vagas} Vaga(s)
             </td>
             <td class="py-4 px-6 text-right font-headline font-bold text-black border-l border-zinc-100 bg-zinc-50/50">
-                ${formatterMoeda.format(imovel.valor_venda)}
+                ${precoVisualizacao}
             </td>
         `;
 
