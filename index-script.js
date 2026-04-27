@@ -212,10 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const imagemGenerica = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80';
 
         try {
-            // Busca todos os imóveis não-pausados (só o campo bairro)
+            // Busca todos os imóveis não-pausados
             const { data: imoveis, error } = await sb
                 .from('imoveis')
-                .select('bairro')
+                .select('bairro, valor_venda, valor_aluguel')
                 .neq('status', 'Pausado');
 
             if (error) {
@@ -229,16 +229,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Agrupa e conta por bairro
-            const bairroCounts = {};
+            // Agrupa e conta por bairro e analisa os tipos de propriedades
+            const bairroStats = {};
             imoveis.forEach(i => {
                 const b = i.bairro;
-                bairroCounts[b] = (bairroCounts[b] || 0) + 1;
+                if (!bairroStats[b]) {
+                    bairroStats[b] = { count: 0, hasVenda: false, hasAluguel: false };
+                }
+                bairroStats[b].count++;
+                if (i.valor_venda > 0) bairroStats[b].hasVenda = true;
+                if (i.valor_aluguel > 0) bairroStats[b].hasAluguel = true;
             });
 
             // Ordena por quantidade de imóveis (decrescente)
-            const bairrosOrdenados = Object.entries(bairroCounts)
-                .sort((a, b) => b[1] - a[1]);
+            const bairrosOrdenados = Object.entries(bairroStats)
+                .sort((a, b) => b[1].count - a[1].count);
 
             container.innerHTML = '';
 
@@ -251,11 +256,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.className = 'grid grid-cols-1 md:grid-cols-4 gap-6';
             }
 
-            bairrosOrdenados.forEach(([bairro, count]) => {
+            bairrosOrdenados.forEach(([bairro, stats]) => {
+                const count = stats.count;
                 const imagem = imagensBairros[bairro] || imagemGenerica;
 
+                let linkUrl = `imoveis.html?bairro=${encodeURIComponent(bairro)}`;
+                // Se o bairro tem APENAS imóveis para locação, manda direto para a aba de aluguéis
+                if (!stats.hasVenda && stats.hasAluguel) {
+                    linkUrl = `imoveis.html?locacao=true&bairro=${encodeURIComponent(bairro)}`;
+                }
+
                 const card = document.createElement('a');
-                card.href = `imoveis.html?bairro=${encodeURIComponent(bairro)}`;
+                card.href = linkUrl;
                 card.className = 'group relative aspect-square overflow-hidden rounded-lg block';
                 card.innerHTML = `
                     <img src="${sanitizeHTML(imagem)}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Bairro ${sanitizeHTML(bairro)}">
