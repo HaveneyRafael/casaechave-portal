@@ -260,11 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const count = stats.count;
                 const imagem = imagensBairros[bairro] || imagemGenerica;
 
-                let linkUrl = `imoveis.html?bairro=${encodeURIComponent(bairro)}`;
-                // Se o bairro tem APENAS imóveis para locação, manda direto para a aba de aluguéis
-                if (!stats.hasVenda && stats.hasAluguel) {
-                    linkUrl = `imoveis.html?locacao=true&bairro=${encodeURIComponent(bairro)}`;
-                }
+                // Manda sempre para o modo misto que mostra vendas e aluguéis juntos
+                const linkUrl = `imoveis.html?ambos=true&bairro=${encodeURIComponent(bairro)}`;
 
                 const card = document.createElement('a');
                 card.href = linkUrl;

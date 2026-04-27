@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlTipo = params.get('tipo');
     const urlBairro = params.get('bairro');
     const urlLocacao = params.get('locacao') === 'true';
+    const urlAmbos = params.get('ambos') === 'true';
 
     // Define Estado Inicial via URL
     if (urlTipo) filtroTipoEl.value = urlTipo;
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // O valor de locação mantemos globalmente na página
     let isLocacao = urlLocacao;
+    let isAmbos = urlAmbos;
     let suitesFilter = null; // null significa "todos"
 
     if (isLocacao) {
@@ -47,7 +49,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .select('*')
                 .neq('status', 'Pausado');
 
-            if (isLocacao) {
+            if (isAmbos) {
+                query = query.or('valor_venda.gt.0,valor_aluguel.gt.0');
+            } else if (isLocacao) {
                 query = query.gt('valor_aluguel', 0);
             } else {
                 query = query.gt('valor_venda', 0);
@@ -121,11 +125,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 let precoFormatado;
                 let badgeLabel;
-                if (isLocacao) {
+                
+                // Em modo misto, precisamos saber se o imóvel é exclusivamente para aluguel
+                const isSomenteLocacao = (imovel.valor_aluguel > 0 && !(imovel.valor_venda > 0));
+                
+                if (isLocacao || isSomenteLocacao) {
                     precoFormatado = formatter.format(imovel.valor_aluguel) + '/mês';
                     badgeLabel = 'Locação';
                 } else {
-                    precoFormatado = imovel.valor_venda ? formatter.format(imovel.valor_venda) : 'Consulte';
+                    precoFormatado = imovel.valor_venda > 0 ? formatter.format(imovel.valor_venda) : 'Consulte';
                     badgeLabel = imovel.status;
                 }
 
@@ -177,6 +185,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         filtroTipoEl.value = "";
         filtroPrecoEl.value = "";
         suitesFilter = null;
+        isAmbos = false; // Sai do modo misto ao limpar filtros
         atualizarBotoesQuartos();
         carregarImoveis();
     }
