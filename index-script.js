@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('imoveis')
                 .select('*')
                 .neq('status', 'Pausado')
-                .not('valor_venda', 'is', null)
+                .gt('valor_venda', 0)
                 .order('valor_venda', { ascending: false }) // maior valor primeiro
                 .limit(6); // mostra até 6 imóveis
 
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('imoveis')
                 .select('*')
                 .neq('status', 'Pausado')
-                .not('valor_aluguel', 'is', null) // Tem que ter valor de aluguel preenchido
+                .gt('valor_aluguel', 0) // Tem que ter valor de aluguel preenchido e > 0
                 .order('created_at', { ascending: false }) // ordenado pelos mais recentes
                 .limit(6);
 

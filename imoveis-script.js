@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .neq('status', 'Pausado');
 
             if (isLocacao) {
-                query = query.not('valor_aluguel', 'is', null);
+                query = query.gt('valor_aluguel', 0);
             } else {
-                query = query.not('valor_venda', 'is', null);
+                query = query.gt('valor_venda', 0);
             }
 
             // Valores Atuais dos Filtros
