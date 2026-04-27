@@ -13,35 +13,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const filtroPreco = document.getElementById('filtro-preco');
     const filtroLocalizacao = document.getElementById('filtro-localizacao');
 
+    const btnBuscarMobile = document.getElementById('btn-buscar-mobile');
+    const filtroLocalizacaoMobile = document.getElementById('filtro-localizacao-mobile');
+
     if (btnBuscar) {
         // Permitir busca com Enter no campo de localização
         filtroLocalizacao.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                executarBusca();
+                executarBusca(false);
             }
         });
 
         btnBuscar.addEventListener('click', () => {
-            executarBusca();
+            executarBusca(false);
         });
     }
 
-    function executarBusca() {
+    if (btnBuscarMobile) {
+        filtroLocalizacaoMobile.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                executarBusca(true);
+            }
+        });
+
+        btnBuscarMobile.addEventListener('click', () => {
+            executarBusca(true);
+        });
+    }
+
+    function executarBusca(isMobile = false) {
         const params = new URLSearchParams();
+        
+        // Buscas globais da home devem procurar em toda a base (Venda e Locação)
+        params.set('ambos', 'true');
 
-        const tipo = filtroTipo.value;
-        if (tipo) params.set('tipo', tipo);
+        if (!isMobile) {
+            const tipo = filtroTipo.value;
+            if (tipo) params.set('tipo', tipo);
 
-        const preco = filtroPreco.value;
-        if (preco) {
-            const [min, max] = preco.split('-');
-            if (min) params.set('preco_min', min);
-            if (max) params.set('preco_max', max);
+            const preco = filtroPreco.value;
+            if (preco) {
+                const [min, max] = preco.split('-');
+                if (min) params.set('preco_min', min);
+                if (max) params.set('preco_max', max);
+            }
+
+            const localizacao = filtroLocalizacao.value.trim();
+            if (localizacao) params.set('bairro', localizacao);
+        } else {
+            const localizacaoMobile = filtroLocalizacaoMobile.value.trim();
+            if (localizacaoMobile) params.set('bairro', localizacaoMobile);
         }
-
-        const localizacao = filtroLocalizacao.value.trim();
-        if (localizacao) params.set('bairro', localizacao);
 
         window.location.href = `imoveis.html?${params.toString()}`;
     }
