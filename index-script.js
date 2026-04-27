@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .from('imoveis')
                 .select('*')
                 .neq('status', 'Pausado')
+                .not('valor_venda', 'is', null)
                 .order('valor_venda', { ascending: false }) // maior valor primeiro
                 .limit(6); // mostra até 6 imóveis
 

@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (isLocacao) {
                 query = query.not('valor_aluguel', 'is', null);
+            } else {
+                query = query.not('valor_venda', 'is', null);
             }
 
             // Valores Atuais dos Filtros
