@@ -18,8 +18,11 @@
 <meta property="og:url" content="https://casaechave.com.br/">
 <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&amp;family=Manrope:wght@200;300;400;500&amp;family=Inter:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/></noscript>
 </head>
 <body class="bg-surface selection:bg-tertiary/10">
 <!-- Announcement Bar -->
@@ -53,7 +56,7 @@
 <!-- Hero Section -->
 <section class="relative min-h-[921px] flex items-center px-12 overflow-hidden">
 <div class="absolute inset-0 z-0">
-<img class="w-full h-full object-cover" alt="Casa de luxo com design moderno e piscina à venda no bairro Jardins, Aracaju" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=100&w=2560"/>
+<img class="w-full h-full object-cover" alt="Casa de luxo com design moderno e piscina à venda no bairro Jardins, Aracaju" fetchpriority="high" srcset="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=70&w=800 800w, https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1600 1600w, https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=2560 2560w" sizes="100vw" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1600"/>
 <div class="absolute inset-0 bg-black/40"></div>
 </div>
 <div class="container mx-auto relative z-10 editorial-grid">
@@ -147,25 +150,25 @@
 <h2 class="text-4xl font-headline font-bold mb-16 text-center">Explore os melhores bairros de Aracaju e Barra dos Coqueiros</h2>
 <div id="bairros-grid" class="grid grid-cols-1 md:grid-cols-4 gap-6">
     <a href="/bairros/jardins" class="relative group overflow-hidden rounded-lg aspect-square">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
         <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
             <h3 class="text-white font-headline font-bold text-2xl">Jardins</h3>
         </div>
     </a>
     <a href="/bairros/atalaia" class="relative group overflow-hidden rounded-lg aspect-square">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
         <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
             <h3 class="text-white font-headline font-bold text-2xl">Atalaia</h3>
         </div>
     </a>
     <a href="/bairros/jabotiana" class="relative group overflow-hidden rounded-lg aspect-square">
-        <img src="https://images.unsplash.com/photo-1448630360428-65ff2c0238ff?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <img src="https://images.unsplash.com/photo-1448630360428-65ff2c0238ff?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
         <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
             <h3 class="text-white font-headline font-bold text-2xl">Jabotiana</h3>
         </div>
     </a>
     <a href="/bairros/barra-dos-coqueiros" class="relative group overflow-hidden rounded-lg aspect-square">
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
         <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
             <h3 class="text-white font-headline font-bold text-2xl">Barra</h3>
         </div>
@@ -182,12 +185,12 @@
 <p class="text-zinc-500 font-body font-light mb-16 max-w-xl mx-auto">Nossos especialistas estão prontos para oferecer um atendimento personalizado e estratégico para a venda do seu imóvel.</p>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
 <div class="flex flex-col items-center">
-<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" alt="Foto do corretor parceiro especialista em imóveis na CasaeChave" src="assets/corretor.jpg"/>
+<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" alt="Foto do corretor parceiro especialista em imóveis na CasaeChave" src="assets/corretor.jpg" loading="lazy"/>
 <p class="font-headline font-bold text-xl">Diretor de Vendas</p>
 <p class="text-sm font-label uppercase tracking-widest text-zinc-400 mt-1">Especialista em Alto Padrão</p>
 </div>
 <div class="flex flex-col items-center">
-<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" alt="Foto da corretora parceira especialista em imóveis na CasaeChave" src="assets/corretora.jpg"/>
+<img class="w-56 h-56 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-500 mb-6" alt="Foto da corretora parceira especialista em imóveis na CasaeChave" src="assets/corretora.jpg" loading="lazy"/>
 <p class="font-headline font-bold text-xl">Diretora Comercial</p>
 <p class="text-sm font-label uppercase tracking-widest text-zinc-400 mt-1">Lançamentos Exclusivos</p>
 </div>
@@ -217,7 +220,7 @@
             </div>
         </div>
         <div class="relative aspect-square">
-            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover rounded-2xl shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1200" class="w-full h-full object-cover rounded-2xl shadow-2xl" loading="lazy">
             <div class="absolute -bottom-10 -left-10 bg-primary p-12 rounded-2xl hidden lg:block">
                 <p class="text-6xl font-headline font-bold leading-none">+55k</p>
                 <p class="text-[10px] uppercase tracking-[0.3em] font-bold mt-2">Buscas mensais mapeadas</p>
@@ -260,7 +263,7 @@
 <a href="/blog-investir-aracaju" class="block">
 <article class="group">
 <div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vista aérea da cidade de Aracaju com prédios modernos residenciais e o rio Sergipe ao fundo" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"/>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Vista aérea da cidade de Aracaju com prédios modernos residenciais e o rio Sergipe ao fundo" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" loading="lazy"/>
 </div>
 <span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Investimento</span>
 <h3 class="text-xl font-headline font-bold mt-2 mb-4">Por que investir em imóveis em Aracaju?</h3>
@@ -271,7 +274,7 @@
 <a href="/blog-qualidade-vida" class="block">
 <article class="group">
 <div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Orla de Atalaia em Aracaju ao pôr do sol, ideal para morar com qualidade de vida" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"/>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Orla de Atalaia em Aracaju ao pôr do sol, ideal para morar com qualidade de vida" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" loading="lazy"/>
 </div>
 <span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Lifestyle</span>
 <h3 class="text-xl font-headline font-bold mt-2 mb-4">Qualidade de vida em Aracaju</h3>
@@ -282,7 +285,7 @@
 <a href="/blog-barra-dos-coqueiros" class="block">
 <article class="group">
 <div class="aspect-[16/9] overflow-hidden rounded-lg mb-6">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Ponte Construtor João Alves ligando Aracaju à Barra dos Coqueiros, região de grande valorização imobiliária" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"/>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Ponte Construtor João Alves ligando Aracaju à Barra dos Coqueiros, região de grande valorização imobiliária" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80" loading="lazy"/>
 </div>
 <span class="text-[10px] font-label uppercase tracking-widest text-tertiary">Expansão</span>
 <h3 class="text-xl font-headline font-bold mt-2 mb-4">O crescimento da Barra dos Coqueiros/SE</h3>
