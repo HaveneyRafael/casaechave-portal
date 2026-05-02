@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="dist/output.css">
+    
+    <title>Kitnets para Alugar em Aracaju | Praticidade e Preço | CasaeChave</title>
+    <meta name="description" content="Procurando kitnet para alugar em Aracaju? Encontre as melhores opções mobiliadas e bem localizadas, perto de universidades e centros comerciais.">
+    <link rel="canonical" href="https://casaechave.com.br/aluguel-kitnet-aracaju" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-surface">
+
+<nav class="fixed top-12 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+    <div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+        <a href="/" class="text-2xl font-bold tracking-tighter uppercase font-headline">CasaeChave</a>
+        <div class="hidden md:flex items-center gap-10 font-headline uppercase text-sm font-semibold">
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="/">Início</a>
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="/imoveis">Imóveis</a>
+            <a class="text-red-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-1 after:h-1 after:bg-red-600 after:rounded-full" href="/aluguel-kitnet-aracaju">Aluguéis</a>
+        </div>
+        <div class="flex items-center gap-6"><a href="/agendar-visita"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider">Agendar Visita</button></a></div>
+    </div>
+</nav>
+
+<main class="pt-32 min-h-screen max-w-[1440px] mx-auto px-12 pb-32">
+    <div class="pt-16 mb-16">
+        <h1 class="text-6xl font-headline font-bold tracking-tight mb-4">Kitnets para Alugar<br>em Aracaju.</h1>
+        <p class="text-zinc-500 font-light max-w-xl">A melhor seleção de kitnets e estúdios para quem busca praticidade e excelente localização em Aracaju.</p>
+    </div>
+
+    <div class="hidden">
+        <select id="filtro-bairro-page"><option value="">Todos</option></select>
+        <select id="filtro-tipo-page"><option value="Kitnet">Apartamento</option></select>
+        <input type="number" id="filtro-preco-page">
+    </div>
+
+    <div id="imoveis-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <p class="text-zinc-400 font-light col-span-3">Carregando kitnets disponíveis...</p>
+    </div>
+</main>
+
+<script>
+    // Note: If 'Kitnet' is not a separate type in the DB, it might be categorized as 'Apartamento' or 'Estúdio'
+    // For now we assume the type is 'Apartamento' but filtered or it has its own type
+    const url = new URL(window.location);
+    if (!url.searchParams.has('tipo')) url.searchParams.set('tipo', 'Apartamento');
+    if (!url.searchParams.has('locacao')) url.searchParams.set('locacao', 'true');
+    window.history.replaceState({}, '', url);
+</script>
+
+<script src="supabase-config.js"></script>
+<script src="imoveis-script.js"></script>
+
+<footer class="bg-zinc-950 text-white py-24 px-12">
+    <div class="max-w-[1440px] mx-auto text-center">
+        <div class="text-2xl font-bold font-headline uppercase tracking-tighter mb-8">CasaeChave</div>
+        <p class="text-[10px] text-zinc-600 uppercase tracking-[0.2em]">© 2026 CasaeChave · Aluguel de Kitnets em Aracaju</p>
+    </div>
+</footer>
+
+</body>
+</html>

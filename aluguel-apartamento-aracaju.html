@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="dist/output.css">
+    
+    <title>Apartamentos para Alugar em Aracaju | Melhores Bairros | CasaeChave</title>
+    <meta name="description" content="Encontre os melhores apartamentos para alugar em Aracaju. Opções de alto padrão, mobiliados e nos bairros Jardins, Atalaia e muito mais.">
+    <link rel="canonical" href="https://casaechave.com.br/aluguel-apartamento-aracaju" />
+
+    <meta property="og:title" content="Apartamentos para Alugar em Aracaju | CasaeChave">
+    <meta property="og:description" content="Sua nova morada está aqui. Explore apartamentos exclusivos para locação em Aracaju.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;600;700&family=Manrope:wght@200;300;400;500&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-surface">
+
+<nav class="fixed top-12 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-zinc-200/50">
+    <div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+        <a href="/" class="text-2xl font-bold tracking-tighter uppercase font-headline">CasaeChave</a>
+        <div class="hidden md:flex items-center gap-10 font-headline uppercase text-sm font-semibold">
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="/">Início</a>
+            <a class="text-zinc-500 hover:text-zinc-950 transition-colors" href="/imoveis">Imóveis</a>
+            <a class="text-red-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-1 after:h-1 after:bg-red-600 after:rounded-full" href="/aluguel-apartamento-aracaju">Aluguéis</a>
+        </div>
+        <div class="flex items-center gap-6"><a href="/agendar-visita"><button class="bg-primary text-white px-6 py-2.5 rounded-lg text-xs font-label uppercase tracking-wider">Agendar Visita</button></a></div>
+    </div>
+</nav>
+
+<main class="pt-32 min-h-screen max-w-[1440px] mx-auto px-12 pb-32">
+    <div class="pt-16 mb-16">
+        <h1 class="text-6xl font-headline font-bold tracking-tight mb-4">Apartamentos para<br>Alugar em Aracaju.</h1>
+        <p class="text-zinc-500 font-light max-w-xl">Explore nossa curadoria de apartamentos para locação nos melhores bairros de Aracaju. Conforto, segurança e alto padrão.</p>
+    </div>
+
+    <!-- Filter Bar (Hidden but present for script compatibility) -->
+    <div class="hidden">
+        <select id="filtro-bairro-page"><option value="">Todos</option></select>
+        <select id="filtro-tipo-page"><option value="Apartamento">Apartamento</option></select>
+        <input type="number" id="filtro-preco-page">
+    </div>
+
+    <!-- Properties Grid -->
+    <div id="imoveis-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <p class="text-zinc-400 font-light col-span-3">Carregando apartamentos disponíveis...</p>
+    </div>
+</main>
+
+<script>
+    // Force filters before the script loads
+    const url = new URL(window.location);
+    if (!url.searchParams.has('tipo')) url.searchParams.set('tipo', 'Apartamento');
+    if (!url.searchParams.has('locacao')) url.searchParams.set('locacao', 'true');
+    window.history.replaceState({}, '', url);
+</script>
+
+<script src="supabase-config.js"></script>
+<script src="imoveis-script.js"></script>
+
+<footer class="bg-zinc-950 text-white py-24 px-12">
+    <div class="max-w-[1440px] mx-auto text-center">
+        <div class="text-2xl font-bold font-headline uppercase tracking-tighter mb-8">CasaeChave</div>
+        <p class="text-[10px] text-zinc-600 uppercase tracking-[0.2em]">© 2026 CasaeChave · Locação Premium em Aracaju</p>
+    </div>
+</footer>
+
+</body>
+</html>
