@@ -37,6 +37,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.title = 'CasaeChave | Imóveis para Locação';
         const h1 = document.querySelector('main h1');
         if (h1) h1.textContent = 'Imóveis para Locação';
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.content = 'Encontre os melhores imóveis para locação em Aracaju com a CasaeChave. Casas e apartamentos para alugar com segurança e agilidade.';
+    } else if (urlBairro) {
+        document.title = `Imóveis em ${urlBairro} - Aracaju | CasaeChave`;
+        const h1 = document.querySelector('main h1');
+        if (h1) h1.textContent = `Imóveis em ${urlBairro}`;
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.content = `Descubra as melhores opções de imóveis à venda ou para alugar em ${urlBairro}, Aracaju. A CasaeChave tem as melhores ofertas da região.`;
     }
 
     // Função Principal de Busca
