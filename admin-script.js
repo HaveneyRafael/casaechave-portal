@@ -156,7 +156,7 @@ formCadastrar.addEventListener('submit', async (e) => {
 
     // 1. Pegar dados do formulario
     const titulo = document.getElementById('titulo').value;
-    
+    const cidade = document.getElementById('cidade').value;
     const bairro = document.getElementById('bairro').value;
     const tipo = document.getElementById('tipo').value;
     const valor_venda = document.getElementById('valor_venda').value ? parseFloat(document.getElementById('valor_venda').value) : null;
@@ -188,7 +188,7 @@ formCadastrar.addEventListener('submit', async (e) => {
 
         // 3. Gerar campos SEO automaticamente
         btnPublicar.innerText = 'Gerando SEO...';
-        const dadosImovel = { titulo, bairro, tipo, valor_venda, valor_aluguel, status, area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu, descricao };
+        const dadosImovel = { titulo, cidade, bairro, tipo, valor_venda, valor_aluguel, status, area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu, descricao };
         const seoData = SEO.gerarCamposSEO(dadosImovel);
 
         // 4. Inserir no Banco de Dados usando o perfil autenticado da base
@@ -203,7 +203,7 @@ formCadastrar.addEventListener('submit', async (e) => {
         const { data, error } = await sb
             .from('imoveis')
             .insert([{
-                titulo, corretor, corretor_foto, corretor_whatsapp, bairro, tipo, valor_venda, valor_aluguel, status, 
+                titulo, corretor, corretor_foto, corretor_whatsapp, cidade, bairro, tipo, valor_venda, valor_aluguel, status, 
                 area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu,
                 descricao, infraestrutura, imagens: arrayImagensUrls,
                 slug: seoData.slug,

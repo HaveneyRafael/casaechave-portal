@@ -36,12 +36,13 @@
     function gerarTitleTag(imovel) {
         const tipo = imovel.tipo || '';
         const bairro = imovel.bairro || '';
+        const cidade = imovel.cidade || 'Aracaju';
 
         // Tenta o formato completo primeiro
-        let title = `${tipo} no ${bairro} – Aracaju | CasaeChave`;
+        let title = `${tipo} no ${bairro} – ${cidade} | CasaeChave`;
 
         if (title.length > 60) {
-            // Tenta sem "Aracaju"
+            // Tenta sem a cidade
             title = `${tipo} no ${bairro} | CasaeChave`;
         }
         if (title.length > 60) {
@@ -73,7 +74,9 @@
             partes.push(formatarPreco(imovel.valor_aluguel) + '/mês');
         }
 
-        let desc = partes.join(' • ') + '. Aracaju/SE.';
+        const cidade = imovel.cidade || 'Aracaju';
+        const uf = imovel.uf || 'SE';
+        let desc = partes.join(' • ') + `. ${cidade}/${uf}.`;
 
         // Adiciona CTA se couber
         const cta = ' Agende uma visita pela CasaeChave.';
@@ -99,13 +102,14 @@
         if (imovel.area_m2) detalhes.push(`${imovel.area_m2}m²`);
         if (detalhes.length > 0) partes.push(detalhes.join(', '));
 
-        if (imovel.bairro) partes.push(`– ${imovel.bairro}, Aracaju`);
+        const cidade = imovel.cidade || 'Aracaju';
+        if (imovel.bairro) partes.push(`– ${imovel.bairro}, ${cidade}`);
 
         let h1 = partes.join(' ');
 
         if (h1.length > 70) {
             // Versão mais curta
-            h1 = `${imovel.tipo || ''} ${imovel.suites ? imovel.suites + ' Suítes' : ''} – ${imovel.bairro || 'Aracaju'}`.trim();
+            h1 = `${imovel.tipo || ''} ${imovel.suites ? imovel.suites + ' Suítes' : ''} – ${imovel.bairro || cidade}`.trim();
         }
         if (h1.length > 70) {
             h1 = imovel.titulo || h1;
@@ -121,10 +125,12 @@
     function gerarSlug(imovel) {
         const partes = [];
 
+        const cidade = imovel.cidade || 'aracaju';
+
         if (imovel.tipo) partes.push(imovel.tipo);
         if (imovel.bairro) partes.push(imovel.bairro);
         if (imovel.area_m2) partes.push(`${Math.round(imovel.area_m2)}m2`);
-        partes.push('aracaju');
+        partes.push(cidade);
 
         let slug = partes.join('-');
 
@@ -145,6 +151,8 @@
     function gerarDescricaoSEO(imovel) {
         const tipo = imovel.tipo || 'Imóvel';
         const bairro = imovel.bairro || '';
+        const cidade = imovel.cidade || 'Aracaju';
+        const uf = imovel.uf || 'Sergipe';
         const area = imovel.area_m2 ? `${imovel.area_m2}m²` : '';
         const suites = imovel.suites || 0;
         const vagas = imovel.vagas || 0;
@@ -162,7 +170,7 @@
         }
 
         // Parágrafo 1: Apresentação do imóvel com localização
-        let p1 = `${tipo} ${negocio} no bairro ${bairro}, em Aracaju, Sergipe.`;
+        let p1 = `${tipo} ${negocio} no bairro ${bairro}, em ${cidade}, ${uf}.`;
         if (area) p1 += ` Com ${area} de área privativa`;
         if (suites > 0) p1 += `, ${suites} suíte${suites > 1 ? 's' : ''}`;
         if (vagas > 0) p1 += ` e ${vagas} vaga${vagas > 1 ? 's' : ''} de garagem`;
@@ -206,7 +214,8 @@
         }
 
         // Parágrafo 4: Localização e CTA
-        let p4 = `Localizado no bairro ${bairro} em Aracaju/SE, uma das regiões mais valorizadas da capital sergipana.`;
+        const regiaoDesc = cidade.toLowerCase() === 'aracaju' ? 'capital sergipana' : cidade;
+        let p4 = `Localizado no bairro ${bairro} em ${cidade}, uma das regiões mais valorizadas da ${regiaoDesc}.`;
         p4 += ` Entre em contato com a CasaeChave para agendar uma visita e conhecer este ${tipo.toLowerCase()} pessoalmente.`;
 
         // Montar texto completo
@@ -312,10 +321,12 @@
         }
 
         // Endereço
+        const cidade = imovel.cidade || 'Aracaju';
+        const uf = imovel.uf || 'SE';
         schemaData.address = {
             "@type": "PostalAddress",
-            "addressLocality": "Aracaju",
-            "addressRegion": "SE",
+            "addressLocality": cidade,
+            "addressRegion": uf,
             "addressCountry": "BR",
             "streetAddress": imovel.bairro || ''
         };

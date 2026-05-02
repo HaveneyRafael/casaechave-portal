@@ -28,6 +28,7 @@ async function carregarDadosImovel() {
 
         // Preencher form
         document.getElementById('titulo').value = data.titulo || '';
+        document.getElementById('cidade').value = data.cidade || 'Aracaju';
         document.getElementById('bairro').value = data.bairro || '';
         document.getElementById('tipo').value = data.tipo || 'Apartamento';
         document.getElementById('valor_venda').value = data.valor_venda || '';
@@ -267,6 +268,7 @@ formEditar.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const titulo = document.getElementById('titulo').value;
+    const cidade = document.getElementById('cidade').value;
     const bairro = document.getElementById('bairro').value;
     const tipo = document.getElementById('tipo').value;
     const valor_venda = document.getElementById('valor_venda').value ? parseFloat(document.getElementById('valor_venda').value) : null;
@@ -301,11 +303,11 @@ formEditar.addEventListener('submit', async (e) => {
         btnPublicar.innerText = 'Atualizando BD...';
 
         // Gerar campos SEO automaticamente
-        const dadosImovel = { titulo, bairro, tipo, valor_venda, valor_aluguel, status, area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu, descricao };
+        const dadosImovel = { titulo, cidade, bairro, tipo, valor_venda, valor_aluguel, status, area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu, descricao };
         const seoData = SEO.gerarCamposSEO(dadosImovel);
 
         const obJAtualizar = {
-            titulo, bairro, tipo, valor_venda, valor_aluguel, status, 
+            titulo, cidade, bairro, tipo, valor_venda, valor_aluguel, status, 
             area_m2, quartos, suites, banheiros, vagas, valor_condominio, valor_iptu,
             descricao, infraestrutura, imagens: arrayImagensUrls,
             slug: seoData.slug,
